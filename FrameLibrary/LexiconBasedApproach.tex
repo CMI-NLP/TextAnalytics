@@ -1,0 +1,157 @@
+\begin{frame}{}
+\Huge {Lexicon based Approach}
+\end{frame}
+\begin{frame}{What is a Lexicon?}
+	\begin{itemize}
+		\item A \textbf{lexicon} is a collection of words or vocabulary items in a language.
+		\item It includes information about meanings, forms, and usage.
+		\item Different domains (linguistics, NLP) may define lexicons slightly differently.
+	\end{itemize}
+\end{frame}
+
+% Slide 2: Key Aspects
+\begin{frame}{Key Aspects of a Lexicon}
+	\begin{itemize}
+		\item \textbf{Linguistics}:
+		\begin{itemize}
+			\item Entire set of words and phrases in a language or a person's mental vocabulary.
+			\item Includes part of speech, pronunciation, and definitions.
+		\end{itemize}
+		\item \textbf{Computational Lexicon}:
+		\begin{itemize}
+			\item Structured resource for NLP containing words and their linguistic properties.
+			\item May include synonyms, antonyms, semantic relationships, and grammar rules.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 3: Lexicon vs. Dictionary
+\begin{frame}{Lexicon vs. Dictionary}
+	\begin{itemize}
+		\item Both list words and meanings, but a lexicon is broader in scope.
+		\item Lexicons focus on linguistic and semantic relationships.
+		\item Dictionaries often provide formal definitions and examples.
+	\end{itemize}
+\end{frame}
+
+% Slide 4: Examples of Lexicons
+\begin{frame}{Examples of Lexicons}
+	\begin{itemize}
+		\item \textbf{General Purpose}:
+		\begin{itemize}
+			\item WordNet: Organizes words into synsets and provides relationships like hypernyms.
+		\end{itemize}
+		\item \textbf{Domain-Specific}:
+		\begin{itemize}
+			\item Medical or legal lexicons tailored to specialized fields.
+		\end{itemize}
+		\item \textbf{Multilingual Lexicons}:
+		\begin{itemize}
+			\item BabelNet: Bridges words across languages.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 5: Applications of a Lexicon
+\begin{frame}{Applications of a Lexicon}
+	\begin{itemize}
+		\item \textbf{Natural Language Processing}:
+		\begin{itemize}
+			\item Tokenization and word segmentation.
+			\item Named Entity Recognition (NER).
+			\item Sentiment analysis using sentiment lexicons.
+		\end{itemize}
+		\item \textbf{Language Learning}:
+		\begin{itemize}
+			\item Provides learners with vocabulary and usage examples.
+		\end{itemize}
+		\item \textbf{Search Engines and Information Retrieval}:
+		\begin{itemize}
+			\item Expands user queries with synonyms and related terms.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+% Slide 6: Conclusion
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item A lexicon is essential for understanding and processing language.
+		\item It serves as the backbone of both human cognition and computational systems.
+		\item Plays a critical role in NLP, linguistics, and language learning.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{What is Lemmatization?}
+	\begin{itemize}
+		\item Lemmatization is the process of reducing words to their base or dictionary form, known as the \textbf{lemma}.
+		\item It considers the context and performs morphological analysis to ensure the resulting word is meaningful.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Examples of Lemmatization}
+	\begin{table}[]
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Word}  & \textbf{Lemma} \\
+			\hline
+			running        & run            \\
+			studies        & study          \\
+			children       & child          \\
+			better         & good           \\
+			\hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{How Lemmatization Works}
+	\begin{enumerate}
+		\item \textbf{Morphological Analysis}: Analyzes the structure of the word.
+		\item \textbf{POS Tagging}: Identifies the word's part of speech to determine the correct lemma.
+		\item \textbf{Dictionary Lookup}: Ensures the lemma is an actual word.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Tools for Lemmatization}
+	\begin{itemize}
+		\item \textbf{Python Libraries}:
+		\begin{itemize}
+			\item \textbf{NLTK}: Provides the \texttt{WordNetLemmatizer}.
+			\item \textbf{spaCy}: Efficient lemmatization in its pipeline.
+			\item \textbf{Stanford CoreNLP}: Robust lemmatization tool.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Applications of Lemmatization}
+	\begin{itemize}
+		\item Preprocessing text for machine learning and NLP tasks.
+		\item Enhancing search engine accuracy by normalizing queries.
+		\item Useful in sentiment analysis, topic modeling, and text classification.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Lexicon-Based approach}
+
+\begin{itemize}
+\item [] Lemmatize all sentences
+\item [] Let $\mathsf{L}$ represent the sentiment lexicon pairs, the word and its polarity
+\item[] $Positives = 0, \, Negatives =0$
+\item[] Test Sentence $S =\{w_1,w_2,w_3...w_n\}$
+\item[] For $w$ in $S$
+\begin{itemize}
+\item []   If $w$ found in $\mathsf{L}$ and $w == positive$, then
+	\item[] \quad\quad$Positives = Positives +$1
+     \item[] Else
+	\item[] \quad\quad$Negatives = Negatives +1$
+\end{itemize}
+\item[] If $Positives > Negatives$ then
+     \item[] \quad\quad Return $positive$
+    \item [] Else
+    \item[] \quad\quad Return $negative$
+\end{itemize}
+
+\end{frame}

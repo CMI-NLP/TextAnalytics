@@ -1,0 +1,106 @@
+    \input{./PSHeader.tex}
+
+
+    %opening
+    \title{Assignment 1}
+    \date{}
+    \begin{document}
+        %\fancyhead[c]{Assignment 1}
+        \fancyhead[R]{\textbf{Assignment 1}}
+        %	\fancyfoot[c]{Use extra sheets if needed, clearly marking the question number against each answer}
+        %\fancycenter[10pt]{\textbf{Assignment 1}}{Advanced Programming}{\textbf{Submit by 05-Feb-2024}}
+        \section{Instructions}
+        Please note the following guidelines for submitting your assignments:
+        \begin{enumerate}
+            \item Use \href{https://colab.research.google.com}{Colab}  to submit your assignments.
+            \item You may use  any machine learning library (pyTorch, Tensorflow, etc.) to implement this assignment
+            \item Share the final version of your assignments with the following email ID:
+            \begin{enumerate}
+                \item  ramaseshan.ta@gmail.com
+            \end{enumerate}
+
+            \item I will NOT run/change your Python notebook.
+            \item Naming Conventions for the assignments:
+            \begin{enumerate}
+                \item The first part of the filename should be your First name.
+                \item The second part of the filename should be your roll number.
+                \item The third part of your assignment should be Assignment0X, where X is the assignment number.
+                \item[] \textbf{Example:} \verb|SriramBMC202204_Assignment01.ipynb|
+            \end{enumerate}
+            \item Make sure that all the results are available when you share them.
+            \item \textbf{Optional}: You may use Github to store your versions of the assignment. Advantages - You will never lose your code if you check-in the code into the GitHub repository after changes regularly.
+        \end{enumerate}
+        \pagebreak
+            \section{Assignment 1 (A1) - Parts of Speech Tagging with Recurrent Neural Networks (RNNs)}
+
+\section{PoS Tagging using RNN}
+\subsection{Objective}
+In this assignment, you will explore the task of parts-of-speech (POS) tagging using Recurrent Neural Networks (RNNs). You will implement and train an RNN-based model to automatically assign POS tags to words in a given sentence.
+
+\subsubsection{Learning Outcomes}
+\begin{itemize}
+    \item Understand the concepts of POS tagging
+    \item Learn the importance of PoS tagging
+    \item Gain practical experience in training and building models using RNN for sequence labeling
+    \item Analyze the performance - in terms of time and space complexity and accuracy of labeling by randomly checking the inferred tags
+\end{itemize}
+\subsubsection{Dataset}
+WSJ dataset containing sentences and their corresponding POS tags is attached. The attached compressed file contains around 200 raw ($\approx$ 79K words) and tagged files($\approx$ 79K words + $\approx$ 15K tags). You may split the dataset into training(80\%), validation(10\%), and testing sets(10\%).
+
+\subsubsection{Model Implementation}
+Implement an RNN-based model for POS tagging, such as an LSTM or GRU network.
+Using your Machine library of your choice, define the network architecture, including input layer, embedding layer, recurrent layer(s), and output layer and finally choose appropriate activation functions and loss functions for the task.
+\subsubsection{Model Training}
+Train the model on the training data using an appropriate optimizer (e.g., Adam).
+Monitor the training progress by evaluating the model's performance on the validation set during training.
+Use techniques like early stopping and regularization to prevent overfitting.
+\subsubsection{Evaluation and Analysis}
+Evaluate the final model's performance on the testing set using standard metrics like accuracy, precision, recall, and F1-score for each POS tag.
+Analyze the results and identify any potential errors or areas for improvement.
+\subsubsection{Experimentation (Optional)}
+\begin{itemize}
+    \item Try different RNN architectures or hyper-parameters to improve the model's performance
+    \item Explore methods to handle unknown words or out-of-vocabulary (OOV) tokens
+\end{itemize}
+
+\subsubsection{Deliverables}
+A Jupyter notebook or Python script.
+A report summarizing your findings, including model architecture, training details, evaluation results, and analysis of errors and potential improvements. A few lines would suffice
+
+\subsubsection{Format found in the  corpus}
+\begin{tabular}{|>{\centering\arraybackslash}m{2.5cm}|>{\raggedright\arraybackslash}m{15.5cm}|}
+    \hline
+    Raw&Trinity Industries Inc. said it reached a preliminary agreement to sell 500 railcar platforms to Trailer Train Co. of Chicago.
+    Terms weren't disclosed.
+    Trinity said it plans to begin delivery in the first quarter of next year.
+    \\
+    \hline
+
+    Tagged&Trinity/NNP Industries/NNPS Inc./NNP
+    said/VBD
+    it/PRP
+    reached/VBD
+    a/DT preliminary/JJ agreement/NN
+    to/TO sell/VB
+    500/CD railcar/NN platforms/NNS
+    to/TO
+    Trailer/NNP Train/NNP Co./NNP
+    of/IN
+    Chicago/NNP
+    ./.
+    Terms/NNS
+    were/VBD n't/RB disclosed/VBN ./.
+
+    Trinity/NNP
+    said/VBD
+    it/PRP
+    plans/VBZ to/TO begin/VB
+    delivery/NN
+    in/IN
+    the/DT first/JJ quarter/NN
+    of/IN
+    next/JJ year/NN
+    ./. \\
+    \hline
+\end{tabular}
+\end{document}

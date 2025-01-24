@@ -1,0 +1,179 @@
+
+    \section{Parts of Speech Hidden Markov Algorithm}
+    \subsection{Parts of Speech}
+    \begin{frame}{Hidden Markov Model}
+       The POS-HMM can be used to compute the probability of a given sequence of words, as well as the most likely sequence of POS tags for a given sentence.
+
+       \begin{block}{Components}
+            \begin{itemize}
+                \item \textbf{States} - The set of possible speech tags
+                \item \textbf{Observations} - The words in the vocabulary
+                \item \textbf{Transition Probability} - The probability of transitioning from one state to another
+                \item \textbf{Emission Probability}- The probability of observing a particular word given a particular state
+            \end{itemize}
+       \end{block}
+       \end{frame}
+
+       \begin{frame}{Transition Examples}
+    \begin{block}{Transitioning between common POS tags}
+        \begin{itemize}
+            \item $P(Noun \mid Determiner)$: This represents the probability of a noun following a determiner (e.g., "the", "a"). In English, this is a very high probability, as determiners typically introduce nouns.
+            \item $P(Verb \mid Noun)$: This represents the probability of a verb following a noun. This is also quite common, as verbs often describe actions performed by the noun
+            \item $P(Adjective \mid Comma)$: This represents the probability of an adjective following a comma. This is common for listing multiple adjectives describing the same noun
+        \end{itemize}
+    \end{block}
+    \end{frame}
+
+    \begin{frame}{Emission Probabilities}
+     \begin{block}{Common words and their likely POS tags}
+        \begin{itemize}
+            \item $P("the" \mid Determiner)$: Very high probability because "the" is almost always a determiner
+            \item $P("dog" \mid Noun)$: High probability
+            \item $P("run" \mid Verb)$: High probability
+        \end{itemize}
+\end{block}
+\begin{block}{Ambiguous words:}
+\begin{itemize}
+    \item   $P("book" \mid Noun)$: Mostly high probability
+    \item $P("book" | Verb)$ Depending on the context, this could be high
+    \item $P("dust" | Noun)$: High probability (around 0.8-0.9) because "dust" is mostly a noun.
+    P("dust" | Verb): Lower probability (around 0.1-0.2) because "dust" can also be a verb in specific cases.
+\end{itemize}
+\end{block}
+    \end{frame}
+%\begin{frame}{Sample Transition Table}
+%    Transition probabilities for the POS-HMM\\
+%            \begin{tabular}{|c|c|c|c|}
+%                    \hline
+%                    Transition & N & V & Det \\ \hline
+%                    N & 0.1 & 0.3 & 0.2 \\ \hline
+%                    V & 0.1 & 0.7 & 0.2 \\ \hline
+%                    Det & 0.7 & 0.1 & 0.01 \\ \hline
+%                \end{tabular}
+%\end{frame}
+%    Figure 1 shows a simple POS-HMM for a sentence with three words. The states are Noun (N), Verb (V), and Determiner (Det). The observations are the words "the", "dog", and "chased". The transition probabilities and emission probabilities are shown in the table below the figure.
+%
+%    \begin{figure}
+%        \centering
+%%        \includegraphics[width=0.5\textwidth]{pos_hmm.png}
+%        \caption{A simple POS-HMM for a sentence with three words.}
+%    \end{figure}
+%
+%    \begin{table}
+%        \centering
+%        \begin{tabular}{|c|c|c|c|}
+%            \hline
+%            Transition & N & V & Det \\ \hline
+%            N & 0.5 & 0.3 & 0.2 \\ \hline
+%            V & 0.1 & 0.7 & 0.2 \\ \hline
+%            Det & 0.2 & 0.1 & 0.7 \\ \hline
+%        \end{tabular}
+%        \caption{Transition probabilities for the POS-HMM in Figure 1.}
+%    \end{table}
+%
+%    \begin{table}
+%        \centering
+%        \begin{tabular}{|c|c|c|c|}
+%            \hline
+%            Emission & the & dog & chased \\ \hline
+%            N & 0.8 & 0.9 & 0.1 \\ \hline
+%            V & 0.1 & 0.1 & 0.9 \\ \hline
+%            Det & 0.9 & 0.1 & 0.1 \\ \hline
+%        \end{tabular}
+%        \caption{Emission probabilities for the POS-HMM in Figure 1.}
+%    \end{table}
+%
+%    The POS-HMM can be used to compute the probability of the sentence "the dog chased" as follows:
+%
+%    \begin{align*}
+%        P(\text{the dog chased}) &= P(\text{Det N V}) \\
+%        &= P(\text{Det}) \cdot P(\text{N} | \text{Det}) \cdot P(\text{V} | \text{N}) \\
+%        &= 0.9 \cdot 0.8 \cdot 0.7 \\
+%        &= 0.504
+%    \end{align*}
+%
+%    The POS-HMM can also be used to find the most likely sequence of parts of speech tags for the sentence. This can be done using the Viterbi algorithm.
+%
+%    The POS-HMM is a powerful tool for natural language processing tasks such as machine translation, information retrieval, and sentiment analysis.
+%
+%\end{frame}
+
+\begin{frame}{Unsupervised Learning}
+    Can we use unsupervised Learning?
+    \begin{itemize}
+        \item \textbf{Initialization}:
+        Assign initial POS tags randomly or based on some heuristic.
+        \item \textbf{Expectation Step:}
+        Estimate the probability of each word belonging to different POS tags based on the current set of POS tags.
+        \item \textbf{Maximization Step:}
+        Update the POS tags based on the probabilities obtained in the expectation step.
+        \item \textbf{Repeat:}
+        Iterate between the expectation and maximization steps until convergence.
+    \end{itemize}
+
+    Did it work? \emoji{thinking}
+\end{frame}
+\subsection{Initialization}
+\begin{frame}{Initialization}
+    The model is initialized with the learned parameters obtained during the training phase.
+    Input Sentence:
+    Given a new sentence with words
+    $W = w_i, w_2, w_3, \ldots, w_m$, the goal is to assign the most likely sequence of POS tags $T = t_1, t_2, t_3, \ldots, t_m$ to the corresponding words in $W$
+
+\begin{itemize}
+    \item Define the set of POS tags: $T = \{t_1, t_2, \ldots, t_m\}$.
+    \item Initialize the state transition probabilities $A_{ij}$, where $A_{ij}$ represents the probability of transitioning from  $t_i$ to $t_j$.
+    \item Initialize the emission probabilities $B_{jk}$, where $B_{jk}$ represents the probability of observing word $k$ given the POS  $t_j$.
+    \item Initialize the initial state probabilities $\pi_i$, where $\pi_i$ represents the probability of starting with POS  $t_i$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Markov Chain}
+    \begin{definition}
+        \textit{A Markov chain is a stochastic process characterized by the Markov property: the probability of transitioning to the next state depends only on the current state, not on the history of previous states.}
+    \end{definition}
+%\begin{tikzpicture}[on grid,
+%    state/.style={circle,draw},
+%    > = Stealth,
+%    auto,
+%    prob/.style = {inner sep=1pt,font=\scriptsize},
+%    every edge/.append style={bend left=15}
+%    ]
+%    \node[state]  (a) {$\Uparrow$};
+%    \node[state]  (b) [right = 4cm of a]   {$\Downarrow$};
+%    \node[state]  (c) [below right = 3cm and 2cm of a]    {$\Leftrightarrow$};
+%    \path[->]   (a) edge node[prob]{$0.$} (b)
+%    edge node[prob]{$1$} (c)
+%    (b) edge node[prob]{$1/3$} (a)
+%    edge node[prob]{$2/3$} (c)
+%    (c) edge node[prob]{$1/3$} (a)
+%    edge node[prob]{$2/3$} (b);
+%    \draw[in=65, out=115, loop, ->] (a) to ();
+%    \draw[in=65, out=115,loop, ->] (b) to ();
+%   \draw [in=-65, out=-115, loop, ->]{$V_m\sin(\phi)$}(c) to ();
+%\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Training and Tagging}
+    \begin{block}{Training}
+\begin{itemize}
+    \item Train the HMM on a labeled dataset of sentences and their corresponding POS tags.
+    \item Estimate the transition probabilities $A_{ij}$, emission probabilities $B_{jk}$, and initial state probabilities $\pi_i$ using the training data.
+\end{itemize}
+    \end{block}
+\begin{block}{POS Tagging}
+    \begin{itemize}
+        \item Given a new sentence with words $W = \{w_1, w_2, \ldots, w_m\}$:
+        \item Initialize the Viterbi matrix $V$ with dimensions $n \times m$, where $n$ is the number of POS tags and $m$ is the number of words in the sentence.
+        \item Fill in the Viterbi matrix using the forward algorithm:
+        \[
+        V_{ij} = \max_{k} \left(\pi_k \times B_{kj} \times A_{ki}\right) \times \text{{score of previous state}}
+        \]
+        \item Backtrack to find the optimal sequence of POS tags.
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Vitterbi Algorithm}
+The Viterbi algorithm is a dynamic programming algorithm used for finding the most likely sequence of hidden states (or labels) in a Hidden Markov Model (HMM) given an observed sequence of data. In the context of Parts of Speech (POS) tagging, the hidden states are the POS tags, and the observed sequence is the sequence of words in a sentence.
+\end{frame}

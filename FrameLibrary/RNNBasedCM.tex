@@ -1,0 +1,181 @@
+\tikzstyle{hidden} = [rectangle, draw, text width=1.75em, text centered, rounded corners, minimum height=2.5em, node distance=0.6cm,minimum height=5em,fill,blue,opacity=0.85]
+\tikzstyle{block} = [rectangle, draw, text width=1.5em, text centered, rounded corners, minimum height=1.5em, node distance=0.5cm,minimum height=2.25em]
+\DeclareDocumentCommand\connector{ O{s} m O{->} m }{
+    \ifthenelse{\equal{#1}{s}}{\draw[#3] (#2) -- (#4);}{}
+    \ifthenelse{\equal{#1}{hv}}{\draw[#3] (#2) -| (#4);}{}
+    \ifthenelse{\equal{#1}{vh}}{\draw[#3] (#2) |- (#4);}{}
+    \ifthenelse{\equal{#1}{bl}}{\draw[#3] (#2) to[bend left=45] (#4);}{}
+    \ifthenelse{\equal{#1}{br}}{\draw[#3] (#2) to[bend right=45] (#4);}{}
+}
+
+\section{Neural Network based Conversation Modeling}
+\subsection{Neural Network based Conversation Modeling}
+\begin{frame}{Neural Network based Conversation Modeling - Introduction}
+
+\begin{itemize}
+	\item Deep learning ANNs contribute to the advances in conversational modeling and understanding
+	\item Massive amount of customer data helps in this data-driven approach
+	\item Deep learning leverages the massive amount of dialog/conversation data to learn meaningful features and response generation
+	\item Deepn learning also reduces the hand-coded rules drastically
+	\item Well suited for short-text conversations such as task-oriented dialogs and non-task-oriented dialogs (open conversations)
+	\item Sequence-to-Sequence models suit well for Post-response conversations
+	\item Similar approach followed in NMT, encoder-decoder, could be used in CM
+	\begin{itemize}
+		\item [*] Input post could be encoded by the encoder to produce fixed sized vector
+		\item [*] Decoder similar to the NMT could use the context from encoder to train the model
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+\begin{frame}{Datasets}
+
+\end{frame}
+
+\begin{frame}{Preprocessing}
+\begin{itemize}
+	\item responses with one word answers, such as smiles as comments, wow, oh
+	\item potential advertisements
+	\item
+\end{itemize}
+\end{frame}
+\begin{frame}{Encoder-Decoder for Conversation Modeling}
+\begin{center}
+	\includegraphics[width=0.7\linewidth]{./Images/RNNEncoderDecoder}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Definition}
+Let $ \textbf{x} = (x_1,x_2,x_m)$ be the input sequence representing the post.
+\end{frame}
+
+	\begin{frame}{A Simple RNN-based CM }
+
+\begin{center}
+	\begin{tikzpicture}[thick,scale=0.6, every node/.style={scale=0.6}]
+	\newcounter{jj}{0}
+	\node[hidden] (h00) {};
+	\foreach \i [remember=\i as \lastx (initially 0)] in {1,...,7}
+	{
+		\node[hidden,right= 5mm of h0\lastx] (h0\i) {};
+		\draw [->]  -- (h0\lastx) -- (h0\i);
+	}
+
+	\foreach \i in {A,B,C,$<EOS>$,W,X,Y,Z}
+	{
+		\node [MyText] (t0\the\value{jj}) [below = 1cm of h0\the\value{jj}] {\i};
+		\draw [->] (t0\the\value{jj}) -- (h0\the\value{jj});
+		\stepcounter{jj};
+	}
+
+	\node [MyText] (ss) [below = 0.3cm of t00, text width=2.5cm] at ($(t00.south)!0.5!(t03.south)$){Source Sentence};
+
+	\setcounter{jj}{3}
+	\foreach \i in {W,X,Y,Z,$<EOS>$}
+	{
+		\node [MyText] (t1\the\value{jj}) [above = 1cm of h0\the\value{jj}] {\i};
+		\draw [->]  -- (h0\the\value{jj}) -- (t1\the\value{jj});
+		\stepcounter{jj};
+	}
+	\end{tikzpicture}
+\end{center}
+\begin{equation}
+p(y_{1},\dots,y_{T'}|x_{1},\dots,x_{T})=\prod_{t=1}^{T'}p(y_{t}|v,y_{1},\dots,y_{t-1})
+\end{equation}
+where $v$ is the  fixed dimensional representation of $(x_{1},\dots,x_{T})$ and $p(y_{t}|v,y_{1},\dots,y_{t-1})$ is the Softmax distribution over all the words in the vocabulary
+\end{frame}
+\begin{frame}{Application of Seq2Seq}
+\huge
+This architecture could be used for	machine translation, question/answering,and conversations without major changes in the architecture
+\end{frame}
+
+\begin{frame}{Encoders}
+\begin{center}
+\begin{tikzpicture}
+\setcounter{jj}{0}
+\node[block] (h00) {$h_{0}$};
+\foreach \i [remember=\i as \lastx (initially 0)] in {1,...,3}
+{
+\node[block,right= 5mm of h0\lastx, ] (h0\i) {$h_{\i}$};
+\draw [->]  -- (h0\lastx) -- (h0\i);
+}
+\foreach \i in {A,B,C,$<EOS>$}
+{
+\node [MyText] (t0\the\value{jj}) [below = 0.5cm of h0\the\value{jj}] {\i};
+\draw [->] (t0\the\value{jj}) -- (h0\the\value{jj});
+\stepcounter{jj};
+}
+
+\node [MyText,below = 0.85cm of h03, text width=4cm] at ($(h00.south)!0.5!(h03.south)$) (f1) {$h_t = f(x_t,h_{t-1})$\\$c_t=h_t$};
+
+\node [block] (cv1) [above = 0.8cm of h03,fill,text width=2cm] {\color{black} Context Generator};
+\draw [->] (h03) -- (cv1);
+\node [block] (ct1) [above = 0.4cm of cv1] {$\mathcal{C}$};
+\node (tv1) [block, left = 0.2cm of ct1, fill, text width=5cm]{\color{black}Thought Vector - Neural transformation of the input Vector};
+
+\draw [->] (cv1)--(ct1);
+\setcounter{jj}{0}
+\node[block] (h10) [right = 8mm of h03] {$h_{0}$};
+\foreach \i [remember=\i as \lastx (initially 0)] in {1,...,3}
+{
+\node[block,right= 5mm of h1\lastx, ] (h1\i) {$h_{\i}$};
+\draw [->]  -- (h1\lastx) -- (h1\i);
+}
+\foreach \i in {A,B,C,$<EOS>$}
+{
+\node [MyText] (t1\the\value{jj}) [below = 0.5cm of h1\the\value{jj}] {\i};
+\draw [->] (t1\the\value{jj}) -- (h1\the\value{jj});
+\stepcounter{jj};
+}
+\node at ($(h10.north)!0.5!(h13.north)$) (cv2) [block,yshift=1.3cm, ][fill,text width=2cm] {\color{black} Context Generator};
+\node [block] (ct2) [above = 0.8cm of cv2] {$\mathcal{C}$};
+\node (at1) [block, right = 0.5cm of ct2, fill, text width=2cm]{\color{black}Attention Vector};
+\node (av1) [block, left = 0.2cm of at1, fill, text width=3cm]{\color{black}focus on different parts of their input};
+%\path [draw,<-, dotted, thick] (cv2.north east) --++(0.5,0) --++(0,1) -- (at1.south);
+\draw [->] (cv2)--(ct2);
+\foreach \i in {0,1}
+{
+\connector[bl]{h1\i}[-latex]{cv2}
+}
+\foreach \i in {2,3}
+{
+\connector[br]{h1\i}[-latex]{cv2}
+}
+\node [MyText,below = 0.5cm of h13, text width=4cm] at ($(h10.south)!0.5!(h13.south)$) (f2) {$c_t = \displaystyle\sum_{t=1}^{T}\alpha_{tj}h_j$};
+\node[MyText,below = 0.5mm of at1, text width=4cm]{$\alpha_{ij}=q(h_j,s_{t-1})$};
+\node [MyText, below = 0.5cm of at1] (f3) {};
+
+\node [MyText, below = 0.2cm of f1] (t2) {$\Large {\color{red}Global\;Model}$};
+\node [MyText, below = 0.2cm of f2] (t2) {$\color{red}\Large {Local\;Model}$};
+\connector[bl]{at1}[-stealth,red,dotted]{cv2}
+
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Decoders}
+The decoder is essentially a standard RNN language model with its output conditioned on the context $c$. The generation probability of the $t_{th}$ word is calculated by
+\begin{equation*}
+p(y_t | y_{t-1}\ldots,y_1,x) = g(y_{t-1},s_t,c_t)
+\end{equation*}
+where $y_t$ is a word embedding for the word at time $t$, $g(\cdot)$ is a Softmax activation function, and $s_t$ is the hidden state of decoder at time $t$ calculated by
+$s_t = f(y_{t-1},s_{t-1},c_t)$, and $f(\cdot)$ is a non-linear activation function.
+\end{frame}
+
+\begin{frame}{Model Architecture}
+
+\end{frame}
+\begin{frame}{References}
+\begin{enumerate}
+\item \href{https://arxiv.org/pdf/1503.02364.pdf}{Neural Responding Machine for Short-Text Conversation}
+\item \href{https://arxiv.org/pdf/1506.05869.pdf}{A Neural Conversational Model}
+\item \href{https://arxiv.org/pdf/1506.06714.pdf}{A Neural Network Approach to
+Context-Sensitive Generation of Conversational Responses}
+\item \href{https://arxiv.org/pdf/1409.0473.pdf}{Neural machine translation
+by jointly learning to align and translate}
+\item \href{https://arxiv.org/pdf/1211.3711.pdf}{Sequence Transduction with Recurrent Neural Networks}
+\item \href{https://arxiv.org/pdf/1506.03340.pdf}{Teaching Machines to Read and Comprehend}
+\item \href{https://isaacchanghau.github.io/post/seq2seq_conversation/}{Seq2Seq Learning and Neural Conversational Model}
+\item \href{https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be}{Understanding GRU Networks}
+\end{enumerate}
+\end{frame}

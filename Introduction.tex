@@ -1,0 +1,330 @@
+\input{BeamerHeader.tex}
+\title{Text Analytics}
+\author{Ramaseshan Ramachandran}
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Introduction to Text Analytics}
+\begin{frame}{What is Text Analytics?}
+\begin{itemize}
+    \item Converts unstructured text into insights
+    \item Extracts patterns and trends
+    \item Uses NLP, machine learning, and statistics
+    \item Analyzes data from diverse sources
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Importance of Text Analytics}
+\begin{itemize}
+    \item Unstructured text data is vast
+    \item Text data is messy and variable
+    \item Makes data measurable and valuable
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Benefits of Text Analytics}
+\begin{itemize}
+    \item Understand customers and societal trends
+    \item Enhance decision-making and planning
+    \item Drive engagement and innovation
+\end{itemize}
+\end{frame}
+
+\section{Key Activities in Text Analytics}
+\begin{frame}{Information Retrieval (IR)}
+
+\begin{multicols}{2}
+\begin{itemize}
+    \item Searches documents and metadata
+    \item Extracts relevant data to queries
+    \item Applies to large text collections
+\end{itemize}
+\vfill\null \columnbreak
+\begin{itemize}
+    \item Boolean Retrieval Model
+    \item Vector Space Model (TF-IDF)
+    \item Probabilistic Retrieval Model
+    \item Latent Semantic Indexing (LSI)
+    \item BM25 Algorithm
+\end{itemize}
+
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Text Classification}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Categorizes text into predefined labels
+    \item Applications: spam detection, sentiment analysis
+    \item Automates document organization
+\end{itemize}
+\vfill\null\columnbreak
+\begin{itemize}
+    \item Naive Bayes Classifier
+    \item Support Vector Machines (SVM)
+    \item Logistic Regression
+    \item Decision Trees and Random Forests
+    \item Deep Learning (CNNs, RNNs, Transformers)
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Clustering}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Groups similar texts together
+    \item No predefined labels required
+    \item Useful for exploratory analysis
+\end{itemize}
+
+\vfill\null\columnbreak
+\begin{itemize}
+    \item K-Means Clustering
+    \item Hierarchical Clustering
+    \item DBSCAN (Density-Based Clustering)
+    \item Gaussian Mixture Models (GMMs)
+    \item Spectral Clustering
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Sentiment Analysis}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Determines text’s emotional tone
+    \item Classifies as positive, negative, or neutral
+    \item Applications: marketing, feedback analysis
+\end{itemize}
+\vfill\null\columnbreak
+\begin{itemize}
+    \item Lexicon-Based Approaches
+    \item Rule-Based Sentiment Analysis
+    \item Machine Learning-Based Approaches
+    \item Neural Networks (LSTMs, GRUs, BERT)
+    \item Pretrained Models (RoBERTa, GPT)
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Entity Recognition}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Identifies entities in text (e.g., names)
+    \item Categorizes into people, places, etc.
+    \item Useful for automated content analysis
+\end{itemize}
+\vfill\null\columnbreak
+\begin{itemize}
+    \item Hidden Markov Models (HMMs)
+    \item Conditional Random Fields (CRFs)
+    \item Maximum Entropy Models
+    \item Neural Networks (BiLSTM + CRF)
+    \item Pretrained Models (SpaCy, Hugging Face)
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Topic Modeling}
+\begin{multicols}{2}
+\begin{itemize}
+    \item Discovers themes in document collections
+    \item Applications: summarization, recommendations
+\end{itemize}
+\vfill \null
+\columnbreak
+\begin{itemize}
+\item[] {\larger \underline{\textit{\color{yellow}Algorithms}}}
+    \item Latent Dirichlet Allocation (LDA)
+    \item Non-Negative Matrix Factorization (NMF)
+    \item Latent Semantic Analysis (LSA)
+    \item Gibbs Sampling for LDA
+    \item Neural Topic Models (ProdLDA, BERTopic)
+\end{itemize}
+\end{multicols}
+\end{frame}
+\section{Advanced Techniques}
+\begin{frame}{Other Advanced Techniques}
+\begin{itemize}
+    \item Word Embedding Models (Word2Vec, GloVe, FastText)
+    \item Sentence Embeddings (Sentence-BERT)
+    \item Attention Mechanisms
+    \item Transformers (BERT, GPT, T5)
+    \item Text Summarization (Extractive and Abstractive)
+\end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Conclusion}
+\begin{itemize}
+    \item Text analytics unlocks data potential
+    \item Drives decisions and innovation
+    \item Benefits industries like finance and healthcare
+    \item A variety of algorithms drive text analytics
+    \item Techniques range from statistical to neural
+    \item Tailor solutions based on use case
+\end{itemize}
+\end{frame}
+\begin{frame}{Word embedding cannot fight with others. Why}
+\begin{center}
+	\includegraphics[width=0.55\linewidth]{Images/TAJoke1}
+\end{center}
+
+\end{frame}
+
+
+	% Slide 2: What is Scikit-Learn?
+	\begin{frame}{What is Scikit-Learn?}
+		\begin{itemize}
+			\item {\color{yellow}Definition:} Scikit-learn is a Python library for machine learning, providing tools for:
+			\begin{itemize}
+				\item Classification
+				\item Regression
+				\item Clustering
+				\item Dimensionality reduction
+				\item Preprocessing and more
+			\end{itemize}
+			\item \textbf{Key Features:}
+			\begin{itemize}
+				\item Built on NumPy, SciPy, and matplotlib
+				\item Simple and efficient tools for predictive data analysis
+				\item Open source
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	% Slide 3: Why Use Scikit-Learn in Text Analytics?
+	\begin{frame}{Why Use Scikit-Learn in Text Analytics?}
+		\begin{itemize}
+			\item \textbf{Text Analytics Focus:}
+			\begin{itemize}
+				\item Natural Language Processing (NLP) tasks
+				\item Feature extraction (e.g., bag-of-words, TF-IDF)
+				\item Building predictive models
+			\end{itemize}
+			\item \textbf{Advantages:}
+			\begin{itemize}
+				\item Wide range of algorithms (SVMs, Naive Bayes, etc.)
+				\item User-friendly API for rapid prototyping
+				\item Extensive documentation and community support
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	% Slide 4: Common Use Cases in Text Analytics
+	\begin{frame}{Common Use Cases in Text Analytics}
+		\begin{itemize}
+			\item \textbf{Examples:}
+			\begin{itemize}
+				\item Spam detection
+				\item Sentiment analysis
+				\item Topic modeling
+				\item Document classification
+			\end{itemize}
+			\item \textbf{Techniques:}
+			\begin{itemize}
+				\item Preprocessing: Tokenization, stemming, lemmatization
+				\item Vectorization: TF-IDF or CountVectorizer
+				\item Model training: Logistic regression, SVMs, etc.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	% Slide 5: Typical Workflow in Scikit-Learn
+	\begin{frame}{Typical Workflow in Scikit-Learn}
+		\begin{enumerate}
+			\item \textbf{Data Preprocessing:}
+			\begin{itemize}
+				\item Cleaning text data (e.g., removing stop words)
+				\item Vectorization (e.g., TF-IDF)
+			\end{itemize}
+			\item \textbf{Model Selection:}
+			\begin{itemize}
+				\item Choosing an algorithm (e.g., Naive Bayes)
+			\end{itemize}
+			\item \textbf{Model Training:}
+			\begin{itemize}
+				\item \texttt{model.fit(X\_train, y\_train)}
+			\end{itemize}
+			\item \textbf{Model Evaluation:}
+			\begin{itemize}
+				\item Metrics like accuracy, precision, recall
+			\end{itemize}
+			\item \textbf{Prediction:}
+			\begin{itemize}
+				\item \texttt{model.predict(X\_test)}
+			\end{itemize}
+		\end{enumerate}
+	\end{frame}
+	
+	% Slide 6: Example: Text Classification Workflow
+	\begin{frame}{Example: Text Classification Workflow}
+		\textbf{Dataset:} Sentiment Analysis on Product Reviews
+		\begin{enumerate}
+			\item Load dataset
+			\item Preprocess text (lowercase, remove punctuation, etc.)
+			\item Vectorize with TF-IDF
+			\item Train model (e.g., Logistic Regression)
+			\item Evaluate using accuracy and F1-score
+		\end{enumerate}
+\end{frame}
+		\begin{frame}[fragile]{Code Example:}
+		\begin{lstlisting}
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(text_data)
+X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.2)
+model = LogisticRegression()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, predictions))
+		\end{lstlisting}
+	\end{frame}
+	
+	% Slide 7: Strengths and Limitations
+	\begin{frame}{Strengths and Limitations}
+		\begin{itemize}
+			\item \textbf{Strengths:}
+			\begin{itemize}
+				\item Easy to use and integrate
+				\item Extensive support for text-related tasks
+				\item Scalability for moderate-sized datasets
+			\end{itemize}
+			\item \textbf{Limitations:}
+			\begin{itemize}
+				\item Not designed for deep learning
+				\item Limited support for out-of-core learning
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	% Slide 8: Resources to Learn More
+	\begin{frame}{Resources to Learn More}
+		\begin{itemize}
+			\item Official Documentation: \url{https://scikit-learn.org}
+			\item Tutorials:
+			\begin{itemize}
+				\item "Getting Started with Scikit-Learn" (Blog/Video)
+				\item Kaggle courses on ML
+			\end{itemize}
+			\item Recommended Books:
+			\begin{itemize}
+				\item \textit{Python Machine Learning} by Sebastian Raschka
+				\item \textit{Introduction to Machine Learning with Python} by Andreas Müller
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	% Slide 9: Q&A
+	\begin{frame}{Questions \& Answers}
+		\centering
+		\Large Questions?
+	\end{frame}
+	
+
+
+\end{document}

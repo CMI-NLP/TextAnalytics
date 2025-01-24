@@ -1,0 +1,149 @@
+
+\begin{frame}{Naive Bayes Algorithm}
+    \begin{itemize}
+        \item A generative model for binary classification
+        \item Probabilistic principles for predictions are used
+        \item []\keywordclr{Key principles}
+        \begin{itemize}
+            \item Class-conditional independence
+            \item Bayes' theorem
+        \end{itemize}
+        \item Simple and effective for many classification tasks.
+    \end{itemize}
+\end{frame}
+
+% Slide: Model Description
+\begin{frame}{Model Description}
+    \begin{itemize}
+        \item Naive Bayes assumes the following generative process:
+        \begin{enumerate}
+            \item A biased coin determines the class label $y \in \{0, 1\}$ with $P(y=1) = p$.
+            \item $d$ independent coins generate binary features $\mathbf{x} = [x_1, x_2, \dots, x_d]$:
+            \[
+            P(x_i = 1 | y) = P_y(i), \quad P(x_i = 0 | y) = 1 - P_y(i).
+            \]
+        \end{enumerate}
+        \item []\clrtxt{cyan}{Class-conditional independence}
+        \begin{itemize}
+            \item Given the class label $y$, all features $x_1, x_2, \dots, x_d$ are independent.
+            \item Reduces the number of parameters from $2^d$ to $2d$.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%\begin{frame}{A Simple SA Algorithm}
+%\begin{algorithm}[H]
+%\caption{Naive Bayes Assumptions}
+%\begin{algorithmic}
+%\STATE Naive Bayes assumes the following generative process:
+%\begin{enumerate}
+%    \item A biased coin determines the class label $y \in \{0, 1\}$ with $P(y=1) = p$.
+%    \item $d$ independent coins generate binary features $\mathbf{x} = [x_1, x_2, \dots, x_d]$:
+%    \[
+%    P(x_i = 1 | y) = P_y(i), \quad P(x_i = 0 | y) = 1 - P_y(i).
+%    \]
+%\end{enumerate}
+%\STATE \textcolor{cyan}{Class-conditional independence}:
+%\begin{itemize}
+%    \item Given the class label $y$, all features $x_1, x_2, \dots, x_d$ are independent.
+%    \item Reduces the number of parameters from $2^d$ to $2d$.
+%\end{itemize}
+%\end{algorithmic}
+%\end{algorithm}
+%\end{frame}
+
+% Slide: Parameterization
+\begin{frame}{Parameterization}
+    \begin{itemize}
+        \item The model parameters are:
+        \begin{itemize}
+            \item $p$: Probability of $y=1$.
+            \item $P_1(i)$: Probability of $x_i=1$ given $y=1$.
+            \item $P_0(i)$: Probability of $x_i=1$ given $y=0$.
+        \end{itemize}
+        \item Total parameters: $2d + 1$ (one for $p$, $d$ for each class).
+    \end{itemize}
+\end{frame}
+
+% Slide: Parameter Estimation
+\begin{frame}{Parameter Estimation}
+    \begin{itemize}
+        \item Using Maximum Likelihood Estimation (MLE):
+        \begin{itemize}
+            \item \textbf{MLE for $p$:}
+            \[
+            \hat{p} = \frac{1}{n} \sum_{i=1}^n y_i
+            \]
+            \item \textbf{MLE for $P_y(i)$:}
+            \[
+            \hat{P}_y(i) = \frac{\sum_{j=1}^n \mathbb{I}[x_{j,i} = 1 \wedge y_j = y]}{\sum_{j=1}^n \mathbb{I}[y_j = y]}
+            \]
+        \end{itemize}
+        \item $\mathbb{I}[\cdot]$: Indicator function (1 if condition true, 0 otherwise).
+    \end{itemize}
+\end{frame}
+
+% Slide: Prediction Using Naive Bayes
+\begin{frame}{Prediction Using Naive Bayes}
+    \begin{itemize}
+        \item Goal: Predict class label $\hat{y}_{\text{test}}$ for test point $\mathbf{x}_{\text{test}}$.
+        \item \textbf{Bayes' theorem:}
+        \[
+        P(y | \mathbf{x}_{\text{test}}) = \frac{P(\mathbf{x}_{\text{test}} | y) P(y)}{P(\mathbf{x}_{\text{test}})}
+        \]
+        \item Decision rule simplifies to:
+        \[
+        \hat{y}_{\text{test}} =
+        \begin{cases}
+        1, & \text{if } P(\mathbf{x}_{\text{test}} | y=1) P(y=1) > P(\mathbf{x}_{\text{test}} | y=0) P(y=0), \\
+        0, & \text{otherwise.}
+        \end{cases}
+        \]
+    \end{itemize}
+\end{frame}
+
+% Slide: Class-Conditional Likelihoods
+\begin{frame}{Class-Conditional Likelihoods}
+    \begin{itemize}
+        \item Use class-conditional independence assumption:
+        \[
+        P(\mathbf{x}_{\text{test}} | y) = \prod_{i=1}^d P_y(i)^{x_i} (1 - P_y(i))^{1 - x_i}
+        \]
+        \item Final prediction rule:
+        \[
+        \hat{y}_{\text{test}} =
+        \begin{cases}
+        1, & \text{if } \prod_{i=1}^d \hat{P}_1(i)^{x_i} (1 - \hat{P}_1(i))^{1 - x_i} \cdot \hat{p} > \prod_{i=1}^d \hat{P}_0(i)^{x_i} (1 - \hat{P}_0(i))^{1 - x_i} \cdot (1 - \hat{p}), \\
+        0, & \text{otherwise.}
+        \end{cases}
+        \]
+    \end{itemize}
+\end{frame}
+
+% Slide: Advantages and Limitations
+\begin{frame}{Advantages and Limitations}
+    \textbf{Advantages:}
+    \begin{itemize}
+        \item Simple and computationally efficient.
+        \item Scalable to high-dimensional data.
+        \item Performs well despite strong independence assumptions.
+    \end{itemize}
+    \vspace{0.5cm}
+    \textbf{Limitations:}
+    \begin{itemize}
+        \item Independence assumption often unrealistic.
+        \item Can struggle with imbalanced datasets.
+    \end{itemize}
+\end{frame}
+
+% Slide: Conclusion
+\begin{frame}{Conclusion}
+    \begin{itemize}
+        \item Naive Bayes is a fundamental algorithm combining generative modeling with efficient parameter estimation.
+        \item Its simplicity and effectiveness make it widely used in classification tasks.
+        \item While independence assumptions may not hold, it often performs well in real-world scenarios.
+    \end{itemize}
+    \vspace{1cm}
+    \centering
+    \textbf{Questions?}
+\end{frame}
