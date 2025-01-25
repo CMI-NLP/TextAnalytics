@@ -301,15 +301,9 @@ postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 \newcommand{\keywordclr}[2][yellow]{\textcolor{#1}{#2}}
 \newcommand{\headclr}[1]{\textcolor{cyan}{\textbf{\large #1}}\par}
 %\usepackage{fontspec}
-%% \setsansfont{Ubuntu Sans} % or any other system font like Helvetica, Arial, etc
-\usepackage[T1]{fontenc}
+\setsansfont{Helvetica} % or any other system font like Helvetica, Arial, etc
 \usepackage[scaled=0.]{helvet}
-\usepackage{fontspec}
 % Set Helvetica Light as the main font
-\setmainfont{Helvetica Light}[
-  Path = /path/to/font/files/, % Optional: specify the path to the font files if necessary
-  UprightFont = *,
-  ItalicFont = *-Italic,
-  BoldFont = *-Bold,
-  BoldItalicFont = *-BoldItalic
-]
+
+\renewcommand\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
