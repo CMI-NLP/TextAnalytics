@@ -303,15 +303,13 @@ postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 %\usepackage{fontspec}
 %% \setsansfont{Ubuntu Sans} % or any other system font like Helvetica, Arial, etc
 \usepackage[T1]{fontenc}
-\usepackage[scaled=0.9]{helvet}
-%\usepackage{fontspec}
-%\setmainfont[
-%   ItalicFont     = HelveticaNeue-Italic,
-%   BoldFont       = HelveticaNeue-Bold,
-%   BoldItalicFont = HelveticaNeue-BoldItalic]{HelveticaNeue}
-%\newfontfamily\NHLight[
-%   ItalicFont     = HelveticaNeue-LightItalic,
-%   BoldFont       = HelveticaNeue-UltraLight,
-%   BoldItalicFont = HelveticaNeue-UltraLightItalic]{HelveticaNeue-Light}
-%\setsansfont{Helvetica Neue} % or any other system font like Helvetica, Arial, etc
-\setmainfont{HelveticaNeue}
+\usepackage[scaled=0.]{helvet}
+\usepackage{fontspec}
+% Set Helvetica Light as the main font
+\setmainfont{Helvetica Light}[
+  Path = /path/to/font/files/, % Optional: specify the path to the font files if necessary
+  UprightFont = *,
+  ItalicFont = *-Italic,
+  BoldFont = *-Bold,
+  BoldItalicFont = *-BoldItalic
+]
