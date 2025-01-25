@@ -302,19 +302,7 @@ postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 \newcommand{\headclr}[1]{\textcolor{cyan}{\textbf{\large #1}}\par}
 
 \usepackage{fontspec}
-\renewcommand\seriesdefault{l}% use l(ight) as default series
-
-%\setmainfont[
-%   ItalicFont     = HelveticaNeue-Italic,
-%   BoldFont       = HelveticaNeue-Bold,
-%   BoldItalicFont = HelveticaNeue-BoldItalic]{HelveticaNeue}
-%\newfontfamily\NHLight[
-%   ItalicFont     = HelveticaNeue-LightItalic,
-%   BoldFont       = HelveticaNeue-UltraLight,
-%   BoldItalicFont = HelveticaNeue-UltraLightItalic]{HelveticaNeue-Light}
-%
-%\newcommand\textrmlf[1]{{\NHLight#1}}
-%\newcommand\textitlf[1]{{\NHLight\itshape#1}}
-%\let\textbflf\textrm
-%\newcommand\textulf[1]{{\NHLight\bfseries#1}}
-%\newcommand\textuitlf[1]{{\NHLight\bfseries\itshape#1}}
+\usepackage[defaultsans,scaled=.95]{opensans}
+\renewcommand\seriesdefault{l}
+\renewcommand\mddefault{l}
+\renewcommand\bfdefault{sb}% or \renewcommand\bfdefault{m}
