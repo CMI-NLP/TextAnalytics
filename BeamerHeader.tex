@@ -4,8 +4,8 @@
 \usepackage{multicol} 
 \usepackage{amsmath}
 \usepackage{amssymb}
-% \usepackage{vwcol} 
-%\usepackage{python}
+\usepackage{vwcol} 
+\usepackage{python}
 \usepackage[backend=biber, style=numeric,sorting=none]{biblatex}
 
 
@@ -14,9 +14,9 @@
 %\usepackage{multirow}
 \usepackage{wrapfig}
 \usepackage{tcolorbox}
-% \usepackage{rotating}
+\usepackage{rotating}
 %\usepackage{lmodern}% http://ctan.org/pkg/lm
-%\usepackage{anyfontsize}
+\usepackage{anyfontsize}
 \usepackage{algorithm,algorithmic}
 %\usepackage[ruled,vlined]{algorithm2e}
 %\usepackage{mathptmx}
@@ -24,11 +24,8 @@
 %\usepackage{pgfplots}
 %\usepackage{pgfplotstable}
 %\usepackage{outlines}
-
-\DeclareGraphicsExtensions{.pdf,.png}
-
-
-
+\usepackage{venndiagram}
+% \DeclareGraphicsExtensions{.pdf,.png}
 \usepackage{listings}
 %\usepackage{hhline}
 \usepackage{hyperref}
@@ -48,8 +45,9 @@
 %\usepackage{transparent}
 %\usepackage{varwidth}
 % \usepackage{mwe} % provides example image
-\usepackage{emoji}
-\setemojifont{Apple Color Emoji}  % Optional
+
+% \usepackage{emoji}
+% \setemojifont{Apple Color Emoji}  % Optional
 \definecolor{gold}{RGB}{255,215,0}
 \definecolor{myblue}{rgb}{0.0,0.125,0.294}
 \definecolor{beamer_title_color}{rgb}{1.0, 0.576,0.0}%\usepackage{enumitem}
@@ -117,7 +115,6 @@
 \usepackage{nicefrac}
 \usetikzlibrary{automata, shapes.geometric,circuits,positioning,shapes,arrows,fit,calc,decorations.pathmorphing,decorations}
 % or whatever (possibly just delete it)
-
 
 \usepackage[printwatermark=true]{xwatermark}
 
@@ -304,5 +301,6 @@ postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 \newcommand{\keywordclr}[2][yellow]{\textcolor{#1}{#2}}
 \newcommand{\headclr}[1]{\textcolor{cyan}{\textbf{\large #1}}\par}
 \usepackage{fontspec}
-\setsansfont{Avenir Next} % or any other system font like Helvetica, Arial, etc
-
+% \setsansfont{Ubuntu Sans} % or any other system font like Helvetica, Arial, etc
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
