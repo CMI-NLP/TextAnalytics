@@ -1,0 +1,82 @@
+
+\documentclass{article}
+% \usepackage{fontspec}
+\usepackage[a4paper]{geometry}
+\usepackage{hyperref}
+\begin{document}
+\section{ABSA in Indian Languages}
+Aspect-Based Sentiment Analysis (ABSA) has experienced a surge in research in Indian languages, particularly addressing challenges such as resource scarcity and linguistic complexity. This section provides a comprehensive overview of key developments in the field.
+\section{Hindi ABSA}
+\begin{itemize}
+\item Pioneering Work: First comprehensive ABSA framework with 5,417 annotated reviews across 12 domains, addressing \item aspect term extraction (41.04\% F1-score using CRF) and **sentiment classification** (54.05\% accuracy with SVM) [4][7][8].
+\item Advanced Models: Ensembled mBERT models achieved state-of-the-art results for aspect category detection and polarity classification, demonstrating transfer learning’s effectiveness in low-resource settings [1][15].
+
+\item Domain Coverage: Includes restaurants, electronics, and hospitality. Annotated datasets for aspect categories like Price, Food, and Service [9][16].
+
+\end{itemize}
+
+\section{Bengali ABSA}
+\begin{itemize}
+\item BERT Adoption: First use of BERT for ABSA, outperforming traditional models (SVM, CNN) on datasets from social media and news portals [2].
+\item Aspect Annotation**: Manually labeled datasets across five aspects (*Technology*, *Corruption*) and three sentiment polarities [2].
+\end{itemize}
+
+\section{Telugu ABSA}
+\begin{itemize}
+\item Benchmark Dataset: Annotated corpus for three tasks: aspect term extraction, polarity classification, and categorization, validated via BiLSTM and CNN models [6][29].
+\item Multi-Domain Focus: Includes reviews on electronics, books, and movies [6].
+
+\end{itemize}
+\section{Odia ABSA}
+\begin{itemize}
+\item First Benchmark**: Newly created dataset for aspect term extraction and polarity classification across seven domains (e.g., *Handloom Sarees*, *Odia Movies*), achieving 77.20\% accuracy with IndicBERT [3].
+\item Data Augmentation**: Combined back-translation and T5 paraphrase generation to overcome data scarcity [3].
+\end{itemize}
+
+\section{Malayalam and Others}
+\begin{itemize}
+\item Emerging Work**: Preliminary studies using machine learning, though resources remain limited [11][14].
+\item Cross-Language Surveys**: Highlight progress in Hindi, Bengali, Telugu, Urdu, and Malayalam while identifying gaps in Kannada, Nepali, and other languages [5][14].
+
+\end{itemize}
+\section{Challenges and Trends}
+\begin{itemize}
+\item Resource Limitations**: Most studies rely on small, manually annotated datasets (e.g., 1,000–5,000 sentences) [3][6].
+\item Model Innovations: Shift from CRF/SVM (2016–2020) to transformer-based models like mBERT and XLM-R (2021–2025) [1][3][15].
+\item Domain Generalization: Efforts to align datasets with international benchmarks (e.g., SemEval) for better comparability [3][6].
+
+\end{itemize}
+While ABSA research in Indian languages is advancing, languages like Odia and Malayalam remain under-resourced compared to Hindi and Bengali. Recent work emphasizes cross-lingual transfer learning and synthetic data generation to bridge this gap [3][5].
+
+\section{Useful resources}
+\begin{enumerate}
+\item \url{https://www.mdpi.com/2079-9292/10/21/2641}{https://www.mdpi.com/2079-9292/10/21/2641}
+\item \url {https://thesai.org/Downloads/Volume13No12/Paper_112-Aspect_based_Sentiment_Analysis_for_Bengali_Text.pdf}
+\item \url{https://aclanthology.org/2025.coling-main.391.pdf}
+\item \url{https://www.cse.iitb.ac.in/~pb/papers/lrec16-sentiment-resource.pdf}
+\item \url{https://www.cfilt.iitb.ac.in/resources/surveys/2022/kunal_CrossLingualABSA_survey_2022.pdf}
+\item \url{https://aclanthology.org/2020.lrec-1.617/}
+\item \url{https://iitp.ac.in/~shad.pcs15/data/Tutorial-SA-Hindi-GIAN.pdf}
+\item \url{https://www.cse.iitb.ac.in/~pb/papers/cicling16-aspect-based-sa.pdf}
+\item \url{https://aclanthology.org/L16-1429/}
+\item \url{https://www.researchgate.net/publication/372289987_ASPECT-BASED_SENTIMENT_ANALYSIS_A_COMPREHENSIVE_SURVEY_OF_TECHNIQUES_AND_APPLICATIONS}
+\item \url{https://ieeexplore.ieee.org/document/10143021/}
+\item \url{https://web2py.iiit.ac.in/research_centres/publications/download/mastersthesis.pdf.b42c721e7c36be1e.5961736877616e74685f5468657369735f66696e616c2e706466.pdf}
+\item \url{https://arxiv.org/html/2311.10777v4}
+\item \url{https://ieeexplore.ieee.org/document/10392226/}
+\item \url{https://www.researchgate.net/publication/355871180_Aspect-Based_Sentiment_Analysis_in_Hindi_Language_by_Ensembling_Pre-Trained_mBERT_Models}
+\item \url{https://www.researchgate.net/publication/323875540_Aspect_Based_Sentiment_Analysis_Category_Detection_and_Sentiment_Classification_for_Hindi}
+\item \url{https://ieeexplore.ieee.org/document/9402365/}
+\item \url{https://dl.acm.org/doi/10.1145/3485243}
+\item \url{https://www.researchgate.net/publication/379119554_Rule-Based_Approach_in_Aspect-Based_Sentiment_Analysis_of_Hindi_Text}
+\item \url{https://paperswithcode.com/datasets?q=Hostility+Detection+Dataset+in+Hindi&lang=telugu}
+\item \url{https://www.researchgate.net/figure/Flow-of-Design-for-Odia-SentiWordNet_fig1_322582732}
+\item \url{https://dl.acm.org/toc/tallip/current}
+\item \url{https://www.researchgate.net/publication/329667038_A_journey_of_Indian_languages_over_Sentiment_analysis_a_systematic_review}
+%\item \url{https://www.linkedin.com/posts/absa-cib_africaexpertise-activity-7213892896402337793-WjNp}
+\item \url{https://www.ijnrd.org/viewpaperforall.php?paper=IJNRD2303129}
+\item \url{https://iitp.ac.in/~shad.pcs15/data/Tutorial-SA-Hindi-GIAN.pdf}
+\item \url{https://aclanthology.org/2020.lrec-1.617/}
+\item \url{https://www.mdpi.com/2079-9292/10/21/2641}
+\end{enumerate}
+\end{document}
