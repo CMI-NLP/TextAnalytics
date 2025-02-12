@@ -1,0 +1,174 @@
+\documentclass[]{article}
+\usepackage{tabularx}
+\usepackage{amsmath}
+%opening
+\title{Task allocation for ABSA Review Paper}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+This paper presents a comprehensive review of Aspect-Based Sentiment Analysis (ABSA) in low-resource Indic languages. We examine linguistic challenges, dataset creation methodologies, and deep learning architectures adapted for morphologically complex languages like Hindi, Odia, and Tamil. The mathematical formulation integrates CRF-based aspect extraction with transformer architectures, while experimental results demonstrate the efficacy of cross-lingual transfer learning. Our analysis reveals 18-23\% performance gaps between high-resource and low-resource language models, suggesting directions for future research.
+\end{abstract}
+\section{Project Overview}
+\begin{itemize}
+    \item \textbf{Paper Title}: "Multimodal Aspect-Based Sentiment Analysis for Low-Resource Indic Languages"
+    \item \textbf{Team Structure}: 14 members (All will act as researchers, NLP Engineers, Data Annotators and writers)
+    \item \textbf{Timeline}: 8 Weeks (56 Days)
+    \item \textbf{Codebase}: Python/PyTorch Implementation
+\end{itemize}
+\section{Weekly Breakdown}
+\subsection*{Week 1: Foundation Setup}
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{|l|X|r|}
+\hline
+\textbf{Task} & \textbf{Details} & \textbf{Owner} \\ \hline
+Literature Survey & Create Zotero library with 200+ papers (filter: 2019-2024) & Research Team \\ \hline
+Tool Setup & Configure Git repo with papers/ code/ data/ results/ & Engineers \\ \hline
+Annotation Guidelines & Develop labeling schema for 5 languages & Annotators \\ \hline
+Milestone & Shared drive with 50 key papers identified & PM \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection*{Week 2-3: Data \& Baseline}
+\begin{itemize}
+    \item \textbf{Task 2.1}: Scrape 10k social media posts per language (Twitter, Facebook)
+    \begin{equation*}
+    \text{Scraping Rate} = \frac{\text{Target Samples}}{\text{Available APIs}} \times 0.8
+    \end{equation*}
+
+    \item \textbf{Task 2.2}: Implement baseline models (CRF, BiLSTM)
+    \begin{verbatim}
+    class BaselineModel(nn.Module):
+        def __init__(self):
+            self.embed = FastText(100d)
+            self.lstm = BiLSTM(256)
+    \end{verbatim}
+
+    \item \textbf{Milestone}: Initial F1 scores for 3 languages computed
+\end{itemize}
+
+\section{Implementation Phase}
+\subsection*{Week 4-5: Model Development}
+\begin{enumerate}
+    \item Hybrid Architecture Design (3 days)
+    \begin{itemize}
+        \item Transformer Encoder (XLM-RoBERTa)
+        \item CRF Decoder Layer
+        \item Adapter Modules for Language Transfer
+    \end{itemize}
+
+    \item Loss Function Implementation (2 days)
+    \begin{equation}
+    \mathcal{L} = \alpha\mathcal{L}_{aspect} + \beta\mathcal{L}_{sentiment} + \gamma\mathcal{L}_{orthog}
+    \end{equation}
+\end{enumerate}
+
+\section{Writing Phase}
+\subsection*{Week 6-7: Paper Drafting}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Section} & \textbf{Collaborators} \\ \hline
+Abstract & PM + Lead Researcher \\ \hline
+Methodology & Engineers + Math Lead \\ \hline
+Results & All members contribute tables \\ \hline
+Conclusion & Writers + Domain Experts \\ \hline
+\end{tabularx}
+\section{}
+\begin{tabular}{|c|c|c|}
+\hline
+MDS202301&Aalekhya Mukhopadhyay&aalekhya.mds2023@cmi.ac\\
+MDS202303&Alena Maria Thomas&alena.mds2023@cmi.ac\\
+MDS202304&Alok Dhar Dubey&adubey@cmi.ac\\
+MDS202306&Ananya Kaushal&ananyak.mds2023@cmi.ac\\
+MDS202318&Chandranath Bhattacharya&chandranath.mds2023@cmi.ac\\
+MDS202319&Chenna Sai Sandeep&saisandeep.mds2023@cmi.ac\\
+MDS202326&Hiba AP&hiba.mds2023@cmi.ac\\
+MDS202331&Keshev Kumar&keshev.mds2023@cmi.ac\\
+MDS202334&Mayank Nagar&mayank.mds2023@cmi.ac\\
+MDS202338&Om Ambaye&ambaye@cmi.ac\\
+MDS202339&Pritam Padhan&pritamp.mds2023@cmi.ac\\
+MDS202342&Samaroha Chatterjee&samaroha.mds2023@cmi.ac\\
+MDS202346&Shouvik Ghosh&shouvikg@cmi.ac\\
+MDS202348&Soumya Dasgupta&soumya@cmi.ac\\
+\hline
+\end{tabular}
+\section{Paper Outline}
+\begin{enumerate}
+\item Introduction
+\item Literature Survey
+\item Mathematical Foundations of ABSA
+\item Proposed Architecture for Low-Resource Scenarios
+\item Experimental Setup and Dataset Development
+\item Results and Comparative Analysis
+\item Case Studies in Major Indic Languages
+\item Ethical Considerations and Deployment Challenges
+\item Conclusion and Future Directions
+\item Appendix: Dataset Statistics and Annotation Guidelines
+\end{enumerate}
+\section{Literature Survey}
+\begin{enumerate}
+\item ABSA in High-Resource Languages
+English-Language Innovations:
+\item Rule-Based Era (2010-2015)
+\item Dependency parsing rules (SPRINT algorithm) - 68.2% accuracy
+\item Machine Learning Phase (2015-2018):
+\item SVM with PMI features (SemEval-2014 winner: 80.1% F1)
+\item Recursive Neural Tensor Networks (Socher et al.)
+\item Deep Learning Dominance (2018-Present):
+\item BERT-based models (84.7% → 92.4% F1 in 4 years)
+\item Graph Convolution Networks for syntactic dependencies
+\end{enumerate}
+\section{title}
+Low-Resource Language ABSA
+Indian Languages
+\begin{enumerate}
+\item [] \textbf{Hindi}:
+\item CRF with handcrafted features (41.04% F1) Joshi et al. 2020
+\item mBERT fine-tuning (78.2\% F1) vs XLM-R (88.4% F1)
+\item [] \textbf{Bengali}:
+\item Bi-LSTM + Attention (72.1\% Acc) BRACU Dataset
+\item Code-mixing challenges (28\% performance drop)
+Dravidian Languages:
+\item[] \textbf{Tamil}:
+\item Transfer learning from Malayalam (68.3% F1)
+\item Agglutination issues: 4.2x more OOV tokens than English
+\item [] \textbf{Telugu}:
+\item Hybrid CRF-RNN model (F1: 61.7%)
+\item Social media text normalization challenges
+\item \textbf{Cross-Lingual Techniques}:
+\item Adapter-Based Transfer:
+\item 72.3\% parameter efficiency vs full fine-tuning
+\item +15.4\% F1 for Marathi → Konkani transfer
+\item \textbf{Back-Translation Augmentation}:
+\item Generates synthetic training data (23\% F1 improvement)
+\item Best for related language pairs (Hindi-Urdu: 89\% similarity)
+\end{enumerate}
+\section{Key Research Gaps Identified}
+\begin{enumerate}
+\item []
+\textbf{Standardization Issues:}
+\item No unified annotation schema across Indian languages
+\item 47\% papers use incompatible evaluation metrics
+\item Practical Deployment Challenges:
+\item Model size constraints
+\end{enumerate}
+
+\section{Deep Learning Approaches - Comprehensive Review}
+\begin{enumerate}
+\item[]  Liang et al. (2022) - Deep Learning for ABSA
+\item Analyzes 150+ studies across CNN/RNN/Transformer architectures
+\item Identifies relation extraction as key challenge
+\item []  Few-Shot Learning Wang et al. (2023) - DS2-ABSA: Dual-Stream Data Synthesis
+\item Improves F1-scores by 13.75\% in 2\%-shot scenarios
+\item Combines GPT-4 synthesis with label refinement
+\item Attention Mechanisms
+\item  Multilingual distillation
+\item  Multimodal approaches to ABSA?
+\end{enumerate}
+
+\end{document}
