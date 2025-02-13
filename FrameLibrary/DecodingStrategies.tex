@@ -1,0 +1,134 @@
+\section{Decoding Techniques}
+
+\begin{frame}{Pretraining}
+\begin{itemize}
+\item Learns linguistic patterns \& world knowledge from massive text datasets
+\item Trains models to predict text sequences, building foundational language understanding
+\end{itemize}
+\end{frame}
+\begin{frame}{Fundamentals of LLM Decoding}
+\begin{itemize}
+\item \textbf{Core Components:}
+\begin{itemize}
+\item Context window (prior generated text)
+\item Vocabulary probability scores
+\item Decoding strategy algorithm
+\end{itemize}
+\item Autoregressive generation: $P(w_t|w_{<t})$
+\item Key challenge: Balance between:
+\begin{itemize}
+\item Accuracy vs. Creativity
+\item Coherence vs. Diversity
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Greedy Decoding}
+\[
+\hat{w}_i = \arg\max_{w \in V} P(w_i|w_{<i})
+\]
+\begin{itemize}
+\item \textbf{Advantages:}
+\begin{itemize}
+\item Maximizes local probability
+\item High coherence
+\end{itemize}
+\item \textbf{Limitations:}
+\begin{itemize}
+\item Repetitive outputs
+\item Lacks creativity
+\item No error recovery
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Temperature Scaling}
+\begin{equation*}
+P(w_t) = \frac{\exp(z_i/T)}{\sum \exp(z_j/T)}
+\end{equation*}
+\begin{itemize}
+\item \textbf{Effects:}
+\begin{itemize}
+%\item $T \rightarrow $: Greedy behavior
+\item $T = 1$: Normal sampling
+\item $T > 1$: Increased randomness
+\end{itemize}
+\item Applications:
+\begin{itemize}
+\item $T < 1$: Technical writing
+\item $T > 1$: Creative writing
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Advanced Methods}
+
+\begin{frame}{Top-k \& Top-p Sampling}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Top-k:}
+\begin{itemize}
+\item Fixed candidate count
+\item $k=1 \Rightarrow$ greedy
+\item Risk of including implausible tokens
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Top-p (Nucleus):}
+\begin{itemize}
+\item Dynamic candidate selection
+\item Cumulative probability threshold
+\item $\sum p_i \geq p$
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{5mm}
+\textbf{Comparison:}
+\begin{itemize}
+\item Top-p generally more flexible
+\item ChatGPT uses top-p
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Min-p Sampling}
+Adaptive threshold calculation:
+\[
+\text{Threshold}_t = \max(P_t) \times \text{min\_p}
+\]
+\begin{itemize}
+\item Retain tokens where $p_i \geq$ Threshold
+\item Advantages:
+\begin{itemize}
+\item Dynamic vocabulary selection
+\item Maintains model confidence
+\item Reduces low-quality outputs
+\end{itemize}
+\item Typical min\_p values: 0.05-0.2
+\end{itemize}
+\end{frame}
+
+\section{Comparison}
+
+\begin{frame}{Decoding Strategy Properties}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\textbf{Method} & \textbf{Temp.} & \textbf{Stochastic} \\ \hline
+Greedy & No & No \\
+Beam Search & No & No \\
+Temp. Sampling & Yes & Yes \\
+Top-k & Yes & Yes \\
+Top-p & Yes & Yes \\
+Min-p & Yes & Yes \\
+\end{tabular}
+\end{table}
+\begin{itemize}
+\item Key considerations:
+\begin{itemize}
+\item Application requirements
+\item Output quality needs
+\item Computational resources
+\end{itemize}
+\end{itemize}
+\end{frame}
