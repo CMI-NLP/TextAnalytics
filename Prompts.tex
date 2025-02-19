@@ -1,9 +1,7 @@
-\documentclass{beamer}
-\usepackage{verbatim}
-\usetheme{default} % You can choose a different theme
+\include{BeamerHeader.tex}
 \usepackage{titlesec}
 
-\title{Prompt Engineering and Safety in Large Language Models}
+\title{Prompt Engineering\\RAG\\Reasoning}
 \author{Your Name}
 \date{\today}
 
@@ -83,6 +81,10 @@
     Image here
 %    \includegraphics[width=0.5\textwidth]{preference_alignment.png} % Replace with an actual image
 \end{frame}
+\begin{frame}
+\Huge\centering
+Prompting
+\end{frame}
 
 \begin{frame}
     \frametitle{What is a Prompt?}
@@ -94,13 +96,88 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Overview}
+  \begin{itemize}
+    \item Tokenization
+    \item Embedding
+    \item Transformer Networks
+    \item Contextual Understanding
+    \item Language Generation
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tokenization}
+  \begin{itemize}
+    \item Breaking text into smaller units (tokens).
+    \item Tokens can be words, subwords, or characters.
+    \item Transforms raw text into numerical format.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Embedding}
+  \begin{itemize}
+    \item Converting tokens into numerical vectors (embeddings).
+    \item Embeddings capture semantic meaning.
+    \item Similar meanings have close embeddings.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Transformer Networks}
+  \begin{itemize}
+    \item Neural network architecture for sequential data.
+    \item Key component: Attention mechanism.
+    \item Attention weighs the importance of different tokens.
+    \item Enables understanding of context.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contextual Understanding}
+  \begin{itemize}
+    \item Transformer processes embedded tokens.
+    \item Attention builds contextual understanding.
+    \item Understanding represented by neuron activation patterns.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Language Generation}
+  \begin{itemize}
+    \item Predicting the next token in the sequence.
+    \item Based on contextual understanding and learned patterns.
+    \item Probability of each token is calculated.
+    \item Process repeated iteratively.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mathematical Formulation (Simplified)}
+  \begin{itemize}
+    \item Embeddings: $v_i \in \mathbb{R}^d$
+    \item Attention:
+      \begin{equation*}
+        \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+      \end{equation*}
+    \item Probability distributions over vocabularies.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Solution Verification}
+\begin{center}
+\includegraphics[width=0.7\linewidth]{Images/VerificationOfSolutionPrompt}
+\\
+Reference: \href{https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf}{Gemini: A Family of Highly Capable
+Multimodal Models}
+\end{center}
+
+\end{frame}
 \begin{frame}[fragile]
     \frametitle{Prompting for Sentiment Classification}
     \begin{itemize}
         \item Task: Classify the sentiment of a hotel review.
         \item Example Review (BLT Corpus):
         \begin{verbatim}
-Did not like the service that I was provided, when I entered the hotel. I also did not like the area, in which the hotel was located. Too much noise and events going on for me to feel relax.
+Did not like the service that I was provided, when
+I entered the hotel. I also did not like the
+area, in which the hotel was located. Too much
+noise and events going on for me to feel relax.
+
         \end{verbatim}
     \end{itemize}
 \end{frame}
@@ -110,7 +187,12 @@ Did not like the service that I was provided, when I entered the hotel. I also d
     \begin{itemize}
         \item Append an incomplete statement to the review:
         \begin{verbatim}
-Did not like the service that I was provided, when I entered the hotel. I also did not like the area, in which the hotel was located. Too much noise and events going on for me to feel relax. In short, our stay was:
+Did not like the service that I was provided, when
+ I entered the hotel. I also did not like the
+ area, in which the hotel was located. Too much
+ noise and events going on for me to feel relax.
+ In short, our stay was:
+
         \end{verbatim}
         \item This prompt provides context for the LLM.
     \end{itemize}
@@ -200,6 +282,60 @@ Choices:
 Assistant: I believe the best answer is:
         \end{verbatim}
         \item This provides even stronger guidance to the LLM.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Prompt Templates}
+  \begin{itemize}
+    \item Templates provide structure and context to prompts.
+    \item They guide LLMs to generate specific types of responses.
+    \item We'll explore templates using the hotel feedback example.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Template 1: Simple Complaint Template}
+  \textbf{Template:} "I experienced [issue] at [location/time]. Specifically, [details]."
+  \begin{itemize}
+    \item \textbf{Example:} "I experienced poor service at check-in. Specifically, the process was slow and staff was unhelpful."
+    \item \textbf{Example:} "I disliked the hotel's location. Specifically, it was too noisy."
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Template 2: Detailed Feedback Template}
+  \textbf{Template:} "I am writing to express my dissatisfaction with [aspect]. [Details]. As a result, [impact]."
+  \begin{itemize}
+    \item \textbf{Example:} "I am writing to express my dissatisfaction with the check-in service. The process was slow and the staff was unhelpful. As a result, I felt frustrated."
+    \item \textbf{Example:} "I am writing to express my dissatisfaction with the hotel's location. There was constant noise from street events. As a result, I couldn't relax."
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Template 3: Structured Problem-Solution Template}
+    \textbf{Template:} "Problem: [issue]. Details: [details]. Recommendation: [solution]."
+    \begin{itemize}
+        \item \textbf{Example}: "Problem: Slow check-in. Details: 30-minute wait, unhelpful staff. Recommendation: Improve check-in efficiency and staff training."
+        \item \textbf{Example}: "Problem: Noisy location. Details: Constant street events. Recommendation: Provide soundproof rooms or warn guests about the noise."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Template 4: Emotional Impact Template}
+    \textbf{Template:} "I felt [emotion] due to [issue] at [location/time]. [Details]."
+    \begin{itemize}
+        \item \textbf{Example}: "I felt frustrated due to the slow check-in process. The staff was unhelpful and I waited for 30 minutes."
+        \item \textbf{Example}: "I felt stressed due to the noisy location. Constant street events made it impossible to relax."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Applying Multiple Templates}
+    \begin{itemize}
+        \item Templates can be combined for comprehensive feedback.
+        \item Example: "Problem: Slow check-in and noisy location. Details: 30-minute wait, unhelpful staff, constant street events. I felt frustrated and stressed. Recommendation: Improve efficiency, train staff, and address noise issues."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Benefits of Templates}
+    \begin{itemize}
+        \item \textbf{Consistency:} Ensures uniform structure across prompts.
+        \item \textbf{Clarity:} Guides LLMs to generate specific responses.
+        \item \textbf{Efficiency:} Reduces the time needed to craft effective prompts.
     \end{itemize}
 \end{frame}
 
@@ -348,9 +484,9 @@ Retrieval Augmented Generation (RAG)
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Large Language Models (LLMs)}
+\begin{frame}{How do I get updated content with LLMs}
   \begin{itemize}
-    \item LLMs like Gemini are trained on vast datasets, enabling them to generate human-like text.
+    \item LLMs like Gemini/ChapGPT/DeepSeek/LLama are trained on vast datasets, enabling them to generate human-like text.
     \item They excel at understanding and generating language, but can suffer from:
       \begin{itemize}
         \item Lack of up-to-date information.
@@ -358,7 +494,12 @@ Retrieval Augmented Generation (RAG)
       \end{itemize}
   \end{itemize}
 \end{frame}
+\begin{frame}{RAG Overview}
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/RAGOverview}
+\end{center}
 
+\end{frame}
 \begin{frame}{Retrieval Augmented Generation (RAG)}
   \begin{itemize}
     \item RAG enhances LLMs by retrieving relevant information from external knowledge sources.
@@ -381,11 +522,134 @@ Retrieval Augmented Generation (RAG)
     \item This process ensures the response is grounded in external knowledge and contextually relevant.
   \end{itemize}
 \end{frame}
+\begin{frame}{}
+\Huge
+\centering
+Reasoning with LLMS
+\end{frame}
+\begin{frame}{Reasoning Engines}
+  \begin{itemize}
+    \item Reasoning engines are systems designed to derive conclusions from given information.
+    \item They use logical rules and inference mechanisms to process data.
+    \item Traditionally, they have been rule-based systems.
+    \item In the context of AI, they enhance decision-making and problem-solving.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Traditional Reasoning Engines}
+  \begin{itemize}
+    \item Rule-based systems: "If-then" logic.
+    \item Well-defined rules for specific domains.
+    \item Limitations:
+      \begin{itemize}
+        \item Difficulty handling ambiguity.
+        \item Limited to predefined rules.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Reasoning Engines in LLMs}
+  \begin{itemize}
+    \item Modern LLMs are integrating advanced reasoning capabilities.
+    \item Moving beyond simple rule-based systems.
+    \item Enhancing LLMs with:
+      \begin{itemize}
+        \item Contextual reasoning.
+        \item Tool use.
+        \item Agentic workflows.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contextual Reasoning}
+  \begin{itemize}
+    \item LLMs analyze context using vast training data.
+    \item Attention mechanisms process and weigh information.
+    \item Enables understanding of complex relationships.
+    \item Example: Answering questions based on the surrounding text.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Introduction}
+  \begin{itemize}
+    \item Reasoning engines involve logical inference.
+    \item Mathematical frameworks can formalize these processes.
+    \item This treatment focuses on propositional logic and first-order logic.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Propositional Logic}
+  \begin{itemize}
+    \item Propositions: Statements that are either true or false.
+    \item Connectives: $\neg$ (negation), $\wedge$ (conjunction), $\vee$ (disjunction), $\rightarrow$ (implication), $\leftrightarrow$ (biconditional).
+    \item Truth tables: Define the semantics of connectives.
+    \item Inference rules: Modus ponens, modus tollens, etc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mathematical Representation}
+  \begin{itemize}
+    \item Let $P, Q$ be propositions.
+    \item Modus ponens: If $P$ and $P \rightarrow Q$ are true, then $Q$ is true.
+    \item Symbolically: $(P \wedge (P \rightarrow Q)) \rightarrow Q$.
+    \item This can be verified using truth tables.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{First-Order Logic}
+  \begin{itemize}
+    \item Extends propositional logic with predicates, quantifiers, and variables.
+    \item Predicates: Represent properties or relations.
+    \item Quantifiers: $\forall$ (for all), $\exists$ (there exists).
+    \item Variables: Represent objects in a domain.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mathematical Representation (First-Order)}
+  \begin{itemize}
+    \item Example: "All humans are mortal."
+    \item Let $H(x)$ be "x is a human" and $M(x)$ be "x is mortal."
+    \item Symbolically: $\forall x (H(x) \rightarrow M(x))$.
+    \item Inference: If $H(John)$ is true, then $M(John)$ is true.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Reasoning as Inference}
+    \begin{itemize}
+        \item Inference involves deriving new knowledge from existing knowledge.
+        \item Mathematical logic provides formal rules for inference.
+        \item Automated theorem proving: Algorithms that perform logical inference.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Connecting with LLMs}
+    \begin{itemize}
+        \item LLMs can generate and manipulate logical expressions.
+        \item Integrating formal logic with LLMs enhances reasoning capabilities.
+        \item Techniques:
+        \begin{itemize}
+            \item Symbolic reasoning with LLM generated logical rules.
+            \item LLMs used to generate or verify logical proofs.
+            \item Knowledge graphs and logical queries.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Mathematical Reasoning in LLMs}
+    \begin{itemize}
+        \item LLMs can be trained on datasets containing logical expressions and proofs.
+        \item Techniques like neural theorem proving are being explored.
+        \item LLMs can use external tools to perform logical inference.
+        \item Example: LLM generating logical queries for a knowledge graph.
+    \end{itemize}
+\end{frame}
+
 
 \begin{frame}{Seminal Paper References}
   \begin{itemize}
     \item \textbf{Lewis et al. (2020):} "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." \cite{lewis2020retrieval}
     \item \textbf{Komeili et al. (2021):} "Internet-Augmented Language Models through Interactive Retrieval." \cite{komeili2021internet}
+    \item P. Zhao, et al,  ``Retrieval-
+    augmented generation for ai-generated content: A survey'', \href{https://arxiv.org/abs/2402.19473}{3} 2024.
   \end{itemize}
 \end{frame}
 
@@ -413,13 +677,13 @@ Retrieval Augmented Generation (RAG)
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Conclusion}
-  \begin{itemize}
-    \item Prompts, RAG, and LLMs work synergistically to create powerful AI applications.
-    \item RAG addresses the limitations of LLMs by providing access to external knowledge.
-    \item Google Cloud's Vertex AI and Gemini APIs provide the tools for building RAG-enabled applications.
-  \end{itemize}
-\end{frame}
+%\begin{frame}{Conclusion}
+%  \begin{itemize}
+%    \item Prompts, RAG, and LLMs work synergistically to create powerful AI applications.
+%    \item RAG addresses the limitations of LLMs by providing access to external knowledge.
+%    \item Google Cloud's Vertex AI and Gemini APIs provide the tools for building RAG-enabled applications.
+%  \end{itemize}
+%\end{frame}
 
 %\begin{frame}{References}
 %    \begin{thebibliography}{9}
@@ -520,6 +784,10 @@ Retrieval Augmented Generation (RAG)
         \bibitem{lewis2020retrieval}
         Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... \& Riedel, S. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems}, \textbf{33}, 9459-9474.
         \bibitem{komeili2021internet}
+                Komeili, M., Lewis, P., Shuster, K., Yih, W. T., \& Riedel, S. (2021). Internet-augmented language models through interactive retrieval. \textit{arXiv preprint arXiv:2103.07567}.
+                \bibitem{guu2020realm}
+                Guu, K., Lee, K., Tung, Z.,\& Chang, M. W. (2020). REALM: Retrieval-augmented language model pre-training. \textit{arXiv preprint arXiv:2002.08909}.
+
     \end{thebibliography}
 \end{frame}
 
