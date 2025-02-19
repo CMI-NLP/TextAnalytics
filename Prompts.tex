@@ -1,0 +1,528 @@
+\documentclass{beamer}
+\usepackage{verbatim}
+\usetheme{default} % You can choose a different theme
+\usepackage{titlesec}
+
+\title{Prompt Engineering and Safety in Large Language Models}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]
+\begin{block}{Questions}
+\begin{itemize}
+\item How does the prompt relate to the text it generates? Is there any logical reasoning involved in checking whether the context of the prompt corresponds to the generated text?
+\item Is the reasoning engine module utilized in Gemini and other AI engines?
+\item Given that the output is probabilistic and potentially multiple outcomes are possible, how does AI engine select the most probable output from the generated outputs?
+\item Provide a comprehensive explanation of the vertex reasoning engine, accompanied by an illustrative example that elucidates its functionality.
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}
+    \frametitle{Prompting in LLMs}
+    \begin{itemize}
+        \item \textbf{Prompting:} Using natural language instructions to guide LLMs.
+        \item Enables tasks like:
+            \begin{itemize}
+                \item Translation
+                \item Summarization
+                \item Classification
+            \end{itemize}
+        \item  Crucial for effective interaction and desired outputs.
+    \end{itemize}
+    Image here
+%    \includegraphics[width=0.5\textwidth]{example_prompt.png} % Replace with an actual image
+\end{frame}
+
+\begin{frame}
+    \frametitle{In-Context Learning and Instruction Tuning}
+    \begin{itemize}
+        \item \textbf{In-Context Learning:} Prompts act as learning signals, improving performance without parameter updates.
+        \item \textbf{Instruction Tuning:} Fine-tuning LLMs on instruction-response pairs to enhance instruction following.
+        \item Both techniques improve LLM's ability to understand and respond to user requests.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Model Safety Concerns}
+    \begin{itemize}
+        \item LLMs can generate harmful, false, or toxic content.
+        \item Examples include:
+            \begin{itemize}
+                \item Unsafe advice
+                \item Verbal attacks
+                \item Hate speech
+            \end{itemize}
+        \item  Requires careful mitigation strategies.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Model Alignment Techniques}
+    \begin{itemize}
+        \item \textbf{Safety Training:} Training models to avoid generating harmful content.
+        \item \textbf{Preference Alignment:} Aligning model objectives with human goals.
+        \item Common methods:
+            \begin{itemize}
+                \item Reinforcement Learning from Human Feedback (RLHF)
+                \item Direct Preference Optimization (DPO)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Preference Alignment in Detail}
+    \begin{itemize}
+        \item A separate model is trained to assess the alignment of a candidate response with human preferences.
+        \item This model guides the LLM towards generating more desirable outputs.
+        \item  Crucial for ensuring that LLMs are helpful and harmless.
+    \end{itemize}
+    Image here
+%    \includegraphics[width=0.5\textwidth]{preference_alignment.png} % Replace with an actual image
+\end{frame}
+
+\begin{frame}
+    \frametitle{What is a Prompt?}
+    \begin{itemize}
+        \item A prompt is a text string issued to a language model.
+        \item It guides the model to perform a specific task.
+        \item The model generates tokens iteratively, conditioned on the prompt.
+        \item Prompt engineering is the process of crafting effective prompts.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Prompting for Sentiment Classification}
+    \begin{itemize}
+        \item Task: Classify the sentiment of a hotel review.
+        \item Example Review (BLT Corpus):
+        \begin{verbatim}
+Did not like the service that I was provided, when I entered the hotel. I also did not like the area, in which the hotel was located. Too much noise and events going on for me to feel relax.
+        \end{verbatim}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Crafting the Prompt}
+    \begin{itemize}
+        \item Append an incomplete statement to the review:
+        \begin{verbatim}
+Did not like the service that I was provided, when I entered the hotel. I also did not like the area, in which the hotel was located. Too much noise and events going on for me to feel relax. In short, our stay was:
+        \end{verbatim}
+        \item This prompt provides context for the LLM.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{LLM Completions}
+    \begin{itemize}
+        \item The LLM completes the statement by generating tokens.
+        \item Examples of completions:
+        \begin{itemize}
+            \item "... not a pleasant one. The staff at the front desk were not welcoming or friendly, and seemed disinterested in providing good customer service."
+            \item "... uncomfortable and not worth the price we paid. We will not be returning to this hotel."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Mapping Completions to Sentiment}
+    \begin{itemize}
+        \item Negative completions reflect the negative sentiment of the review.
+        \item Map completions to predefined sentiment classes (e.g., negative, positive).
+        \item Example mappings:
+        \begin{itemize}
+            \item \texttt{\{excellent $\rightarrow$ positive\}}
+            \item \texttt{\{did not like $\rightarrow$ negative\}}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Prompting for General Tasks}
+    \begin{itemize}
+        \item LLMs can perform various tasks with appropriate contextual nudges.
+        \item For tasks like summarization and translation, we need reusable prompts.
+        \item \textbf{Templates:} Task-specific prompting text with input slots.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Basic Prompt Templates}
+    \begin{itemize}
+        \item \textbf{Summarization:} \texttt{\{input\}; tldr;}
+        \item \textbf{Translation:} \texttt{\{input\}; translate to French:}
+        \item \textbf{Sentiment:} \texttt{\{input\}; Overall, it was}
+        \item \textbf{Fine-Grained Sentiment:} \texttt{\{input\}; What aspects were important in this review?}
+        \item \texttt{\{input\}} represents the input text.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Instantiated Prompts}
+    \begin{itemize}
+        \item Templates are applied to inputs to create filled prompts.
+        \item Example using the hotel review:
+        \begin{itemize}
+            \item \textbf{Summarization:} \texttt{Did not like the service...relax. tldr;}
+            \item \textbf{Translation:} \texttt{Did not like the service...relax. translate to French:}
+            \item \textbf{Sentiment:} \texttt{Did not like the service...relax. Overall, it was}
+        \end{itemize}
+        \item These are ready to be used with an LLM.  (See Figure 12.1 in your original document for example outputs)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prompt Design Principles}
+    \begin{itemize}
+        \item Input followed by text to be completed is a common pattern.
+        \item This constrains the generation effectively.
+        \item \textbf{Bad Example:} \texttt{Translate English to French: Did not like the service...}
+        \item This prompt is ambiguous and may not produce a translation.
+        \item Prompts should be designed unambiguously.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Constraining Prompts Further}
+    \begin{itemize}
+        \item Specify the set of possible answers in the prompt.
+        \item Example for sentiment analysis:
+        \begin{verbatim}
+Human: Do you think that "input" has negative or positive sentiment?
+Choices:
+(P) Positive
+(N) Negative
+Assistant: I believe the best answer is:
+        \end{verbatim}
+        \item This provides even stronger guidance to the LLM.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Connecting Prompts and Generated Text}
+  \begin{itemize}
+    \item How do LLMs ensure generated text aligns with the prompt?
+    \item Is there logical reasoning involved?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Pattern Recognition and Statistical Relationships}
+  \begin{itemize}
+    \item LLMs trained on massive datasets.
+    \item They recognize statistical relationships between words.
+    \item Given a prompt, they find matching patterns.
+    \item Prediction of "what comes next" based on likelihood.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Contextual Understanding Through Attention}
+  \begin{itemize}
+    \item Transformer architecture with attention mechanism.
+    \item Attention weighs importance of prompt parts.
+    \item Model focuses on relevant information.
+    \item Maintains context throughout generation.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Probabilistic Generation}
+  \begin{itemize}
+    \item Generates text by predicting next word's probability.
+    \item Prediction based on prompt context and preceding words.
+    \item Determines most likely word to follow.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations of "Logical Reasoning"}
+  \begin{itemize}
+    \item LLMs don't possess true reasoning abilities.
+    \item Rely on learned patterns, leading to inconsistencies.
+    \item Can produce factually incorrect statements.
+    \item Active research to improve logical reasoning.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How Context is Maintained}
+  \begin{itemize}
+    \item "Context window" limits preceding text consideration.
+    \item Maintains running context for consistency.
+    \item Context window limitations can affect coherence.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Probabilistic Output and Selection}
+  \begin{itemize}
+    \item LLMs generate probabilistic outputs.
+    \item Multiple probable outcomes exist.
+    \item How does the AI engine select the final output?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Probability Distributions}
+  \begin{itemize}
+    \item LLMs produce probability distributions over possible tokens.
+    \item Each token has an associated probability score.
+    \item Higher scores indicate more likely tokens.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Selection Strategies}
+  \begin{itemize}
+    \item \textbf{Greedy Decoding:}
+      \begin{itemize}
+        \item Selects the token with the highest probability at each step.
+        \item Simple but can lead to suboptimal results.
+      \end{itemize}
+    \item \textbf{Sampling:}
+      \begin{itemize}
+        \item Randomly samples tokens based on their probabilities.
+        \item Introduces diversity but can be inconsistent.
+      \end{itemize}
+    \item \textbf{Beam Search:}
+      \begin{itemize}
+        \item Keeps track of multiple promising sequences (beams).
+        \item Selects the sequence with the highest overall probability.
+        \item Balances quality and diversity.
+      \end{itemize}
+    \item \textbf{Top-k and Top-p Sampling:}
+      \begin{itemize}
+        \item Restricts sampling to the top k most probable tokens or tokens whose cumulative probability exceeds p.
+        \item Controls diversity and reduces the risk of low-probability outputs.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Post-Processing and Refinement}
+  \begin{itemize}
+    \item Selected output may undergo post-processing.
+    \item Techniques like:
+      \begin{itemize}
+        \item Filtering for safety and relevance.
+        \item Re-ranking based on additional criteria.
+        \item Paraphrasing or editing for clarity.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Factors Affecting Selection}
+  \begin{itemize}
+    \item Task requirements (e.g., creativity vs. accuracy).
+    \item Model parameters (e.g., temperature).
+    \item User preferences (e.g., length, style).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Prompt, RAG, and LLMs: A Symbiotic Relationship}
+  \begin{itemize}
+    \item Understanding the interaction between Prompts, Retrieval Augmented Generation (RAG), and Large Language Models (LLMs).
+    \item Exploring the role of Gemini API, Vertex AI API, and seminal papers.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%
+\begin{frame}
+\Huge
+\centering
+Retrieval Augmented Generation (RAG)
+\end{frame}
+
+
+
+\begin{frame}{Overview}
+  \begin{itemize}
+    \item Understanding the interaction between Prompts, Retrieval Augmented Generation (RAG), and Large Language Models (LLMs).
+    \item Exploring the role of Gemini API, Vertex AI API, and seminal papers.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prompts: The Starting Point}
+  \begin{itemize}
+    \item Prompts are the user's input, guiding the LLM's response.
+    \item They define the task, context, and desired output.
+    \item Effective prompts are crucial for accurate and relevant LLM outputs.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Large Language Models (LLMs)}
+  \begin{itemize}
+    \item LLMs like Gemini are trained on vast datasets, enabling them to generate human-like text.
+    \item They excel at understanding and generating language, but can suffer from:
+      \begin{itemize}
+        \item Lack of up-to-date information.
+        \item "Hallucinations" (generating factually incorrect information).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Retrieval Augmented Generation (RAG)}
+  \begin{itemize}
+    \item RAG enhances LLMs by retrieving relevant information from external knowledge sources.
+    \item It addresses the limitations of LLMs by providing access to up-to-date and domain-specific information.
+    \item Key steps:
+      \begin{itemize}
+        \item Retrieval: Using an information retrieval engine to find relevant documents.
+        \item Augmentation: Injecting the retrieved information into the prompt.
+        \item Generation: LLM generates a response based on the augmented prompt.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{The Connection: Prompt + RAG + LLM}
+  \begin{itemize}
+    \item User provides a \textbf{prompt}.
+    \item \textbf{RAG} system retrieves relevant information based on the prompt.
+    \item Retrieved information is incorporated into an \textbf{augmented prompt}.
+    \item \textbf{LLM} uses the augmented prompt to generate a response.
+    \item This process ensures the response is grounded in external knowledge and contextually relevant.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Seminal Paper References}
+  \begin{itemize}
+    \item \textbf{Lewis et al. (2020):} "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." \cite{lewis2020retrieval}
+    \item \textbf{Komeili et al. (2021):} "Internet-Augmented Language Models through Interactive Retrieval." \cite{komeili2021internet}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Google Cloud Ecosystem}
+    \begin{itemize}
+        \item \textbf{Vertex AI API:}
+        \begin{itemize}
+            \item Provides tools and services for building and deploying AI models, including RAG implementations.
+            \item Offers access to LLMs like Gemini and information retrieval capabilities.
+        \end{itemize}
+        \item \textbf{Gemini API:}
+        \begin{itemize}
+            \item Allows developers to integrate Gemini's capabilities into their applications.
+            \item Can be used in conjunction with Vertex AI Search for RAG implementations.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{RAG in Practice}
+    \begin{itemize}
+        \item User asks a question.
+        \item Vertex AI Search retrieves relevant documents.
+        \item Gemini API uses the retrieved documents to generate an informed answer.
+        \item Vertex AI reasoning engine can orchestrate this process.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Prompts, RAG, and LLMs work synergistically to create powerful AI applications.
+    \item RAG addresses the limitations of LLMs by providing access to external knowledge.
+    \item Google Cloud's Vertex AI and Gemini APIs provide the tools for building RAG-enabled applications.
+  \end{itemize}
+\end{frame}
+
+%\begin{frame}{References}
+%    \begin{thebibliography}{9}
+%        \bibitem{lewis2020retrieval}
+%        Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... & Riedel, S. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems}, \textbf{33}, 9459-9474.
+%        \bibitem{komeili2021internet}
+%        Komeili, M., Lewis, P., Shuster, K., Yih, W. T., & Riedel, S. (2021). Internet-augmented language models through interactive retrieval. \textit{arXiv preprint arXiv:2103.07567}.
+%    \end{thebibliography}
+%\end{frame}
+
+
+%%%%%%%%%
+\begin{frame}{Prompts: The Starting Point}
+  \begin{itemize}
+    \item Prompts are the user's input, guiding the LLM's response.
+    \item They define the task, context, and desired output.
+    \item Effective prompts are crucial for accurate and relevant LLM outputs.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Large Language Models (LLMs)}
+  \begin{itemize}
+    \item LLMs like Gemini are trained on vast datasets, enabling them to generate human-like text.
+    \item They excel at understanding and generating language, but can suffer from:
+      \begin{itemize}
+        \item Lack of up-to-date information.
+        \item "Hallucinations" (generating factually incorrect information).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Retrieval Augmented Generation (RAG)}
+  \begin{itemize}
+    \item RAG enhances LLMs by retrieving relevant information from external knowledge sources.
+    \item It addresses the limitations of LLMs by providing access to up-to-date and domain-specific information.
+    \item Key steps:
+      \begin{itemize}
+        \item Retrieval: Using an information retrieval engine to find relevant documents.
+        \item Augmentation: Injecting the retrieved information into the prompt.
+        \item Generation: LLM generates a response based on the augmented prompt.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{The Connection: Prompt + RAG + LLM}
+  \begin{itemize}
+    \item User provides a \textbf{prompt}.
+    \item \textbf{RAG} system retrieves relevant information based on the prompt.
+    \item Retrieved information is incorporated into an \textbf{augmented prompt}.
+    \item \textbf{LLM} uses the augmented prompt to generate a response.
+    \item This process ensures the response is grounded in external knowledge and contextually relevant.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Seminal Paper References}
+  \begin{itemize}
+    \item \textbf{Lewis et al. (2020):} "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." \cite{lewis2020retrieval}
+    \item \textbf{Komeili et al. (2021):} "Internet-Augmented Language Models through Interactive Retrieval." \cite{komeili2021internet}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Google Cloud Ecosystem}
+    \begin{itemize}
+        \item \textbf{Vertex AI API:}
+        \begin{itemize}
+            \item Provides tools and services for building and deploying AI models, including RAG implementations.
+            \item Offers access to LLMs like Gemini and information retrieval capabilities.
+        \end{itemize}
+        \item \textbf{Gemini API:}
+        \begin{itemize}
+            \item Allows developers to integrate Gemini's capabilities into their applications.
+            \item Can be used in conjunction with Vertex AI Search for RAG implementations.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%
+\begin{frame}{RAG in Practice}
+    \begin{itemize}
+        \item User asks a question.
+        \item Vertex AI Search retrieves relevant documents.
+        \item Gemini API uses the retrieved documents to generate an informed answer.
+        \item Vertex AI reasoning engine can orchestrate this process.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Prompts, RAG, and LLMs work synergistically to create powerful AI applications.
+    \item RAG addresses the limitations of LLMs by providing access to external knowledge.
+    \item Google Cloud's Vertex AI and Gemini APIs provide the tools for building RAG-enabled applications.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+    \begin{thebibliography}{9}
+        \bibitem{lewis2020retrieval}
+        Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... \& Riedel, S. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems}, \textbf{33}, 9459-9474.
+        \bibitem{lewis2020retrieval}
+        Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... \& Riedel, S. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems}, \textbf{33}, 9459-9474.
+        \bibitem{komeili2021internet}
+    \end{thebibliography}
+\end{frame}
+
+
+
+\end{document}
