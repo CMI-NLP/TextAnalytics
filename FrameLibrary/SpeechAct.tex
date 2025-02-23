@@ -61,6 +61,118 @@
     Source: \href{https://web.stanford.edu/class/linguist130a/2022/materials/ling130a-handout-03-08-speechacts.pdf}{Speech Act}
 \end{frame}
 
-\begin{frame}{Grounding}
-    Any dialog is not an independent set of sentences. Dialogs happen on a \textbf{\underline{common ground}}. The speakers often perform ground Grounding act by acknowledging that the hearer has understood the speaker
+
+\begin{frame}{Key Evaluation Metrics}
+\begin{itemize}
+    \item Essential for comparing QA system implementations
+    \item Primary metrics (Yao, 2014):
+    \begin{itemize}
+        \item Accuracy
+        \item F1 Score
+    \end{itemize}
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Contingency Table Basis}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\hline
+ & \textbf{Actual Positive} & \textbf{Actual Negative} \\
+\hline
+\textbf{Predicted Positive} & True Positive (TP) & False Positive (FP) \\
+\textbf{Predicted Negative} & False Negative (FN) & True Negative (TN) \\
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Accuracy}
+\[
+\text{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
+\]
+
+\begin{itemize}
+    \item Challenge in QA systems:
+    \item High TN rates can inflate accuracy scores
+    \item Particularly problematic for fact-based questions
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Precision vs Recall}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Precision}
+\[
+P = \frac{TP}{TP + FP}
+\]
+\begin{itemize}
+    \item Focus: Correctness of selected answers
+    \item Preferred for definition/list QA
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{Recall}
+\[
+R = \frac{TP}{TP + FN}
+\]
+\begin{itemize}
+    \item Focus: Completeness of correct answers
+    \item Preferred for fact-based QA
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{F1 Score: Balanced Metric}
+\[
+F1 = \frac{2 \times P \times R}{P + R}
+\]
+
+\begin{itemize}
+    \item Harmonic mean of precision and recall
+    \item Addresses precision-recall trade-off
+    \item Preferred for systems requiring balance
+\end{itemize}
+
+\footnotesize{Source: Zhang et al. (2008), Yao (2014)}
+\end{frame}
+
+\begin{frame}{Metric Selection Guidelines}
+\begin{itemize}
+    \item \textbf{Recall-focused:}
+    \begin{itemize}
+        \item Fact-based QA systems
+        \item High TP critical
+    \end{itemize}
+
+    \item \textbf{Precision-focused:}
+    \begin{itemize}
+        \item Definition/list QA systems
+        \item Minimizing FP essential
+    \end{itemize}
+
+    \item \textbf{F1 Score:}
+    \begin{itemize}
+        \item When balance between P \& R needed
+        \item General system comparisons
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Summary}
+\begin{itemize}
+    \item Accuracy limited for QA system evaluation
+    \item Precision/Recall provide complementary insights
+    \item F1 score offers balanced perspective
+    \item Metric choice depends on system type and goals
+\end{itemize}
+
+\footnotesize{\cite{kumar2019}, Yao (2014), Zhang et al. (2008)}
+\end{frame}
+
+
+%\begin{frame}{Grounding}
+%    Any dialog is not an independent set of sentences. Dialogs happen on a \textbf{\underline{common ground}}. The speakers often perform ground Grounding act by acknowledging that the hearer has understood the speaker
+%\end{frame}
