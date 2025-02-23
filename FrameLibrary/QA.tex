@@ -3,6 +3,16 @@
 
 
 \begin{frame}{Question Answering - Introduction }
+Question answering is a process where AI systems provide answers to questions asked in everyday language\\
+\headclr{Types of Questions}
+\begin{itemize}
+\item \keywordclr{Extractive QA:} Finds the answer directly from the text.
+\item \keywordclr{Abstractive QA:} Generates a new answer, which might rephrase information
+\item Model Examples: BERT for extractive QA and T5 for abstractive QA
+\end{itemize}
+
+\end{frame}
+\begin{frame}
 An application of short Post-Response is Question Answering system, such as IBM Watson (Jeopardy).
 In this case most of the candidate responses are answers for factoid questions
 \begin{itemize}
@@ -17,6 +27,20 @@ In this case most of the candidate responses are answers for factoid questions
 
 \end{frame}
 
+
+\begin{frame}{Question Components}
+
+\begin{itemize}
+
+\item \keywordclr{Question Phrase:} The component of a question that specifies the subject of search.
+\item \keywordclr{Question Type:} A categorization of a question based on its intended purpose.
+\item \keywordclr{Answer Type:} A class of objects that the question seeks to identify.
+\item \keywordclr{Question Focus:} The property or entity that the question is inquiring about.
+\item \keywordclr{Question Topic:} The subject or event that the question pertains to.
+\item \keywordclr{Candidate Passage:} Any text retrieved by a search engine in response to a question, ranging from sentences to documents.
+\item \keywordclr{Candidate Answer:} The text ranked based on its perceived suitability as an answer to the question.
+\end{itemize}
+\end{frame}
 \begin{frame}[fragile,shrink]{Question Answering - Samples}
 	\begin{tabular}{p{8cm}|p{3cm}|p{3cm}}
 		Question&Hierarchy&Type\\
@@ -106,19 +130,15 @@ Most questions could be classified in to 6 major classes\footnote{Xin Li, Dan Ro
 \begin{frame}[fragile, shrink]{Experimental Data for Question Classification}
     \small
     \begin{verbatim}
-        ENTY:cremat What films featured the character Popeye Doyle ?
-        ENTY:animal What fowl grabs the spotlight after
-                    the Chinese Year of the Monkey ?
+        ENTY:animal What fowl grabs the spotlight after the Chinese Year of the Monkey ?
         ABBR:exp What is the full form of .com ?
-        LOC:city What city did the Flintstones live in ?
-        LOC:other Where is the Kalahari desert ?
-        HUM:gr What company tabulates the ballots in
-                   voting for the Academy Awards ?
-        DESC:desc What do Mormons believe ?
-        NUM:money How much money does a back injury lawsuit get ?
-        NUM:other What was Einstein's IQ ?
-        NUM:count How many people died on D-Day ?
-        ABBR:exp What does 'PSI' stand for ?
+        HUM:ind What contemptible scoundrel stole the cork from my lunch ?
+        HUM:gr What team did baseball 's St. Louis Browns become ?
+        HUM:title What is the oldest profession ?
+        DESC:def What are liver enzymes ?
+        HUM:ind Name the scar-faced bounty hunter of The Old West .
+        NUM:date When was Ozzy Osbourne born ?
+        DESC:reason Why do heavier objects travel downhill faster
         ...
     \end{verbatim}
     Reference: \href{https://cogcomp.seas.upenn.edu/Data/QA/QC/}{Training Data for Text Retrieval Conference (TREC)}
@@ -185,7 +205,7 @@ For example, \\
 \end{description}
 \end{frame}
 \begin{frame}{Learning Question Classifiers}
-    \begin{minipage}{0.48\linewidth}
+\begin{multicols}{2}
         \begin{itemize}
             \item Answering factual questions\cite{li-roth-2002-learning}
             \item understanding the question's intent and the type of answer it seeks
@@ -193,15 +213,14 @@ For example, \\
             \item Constraining the search for potential answers
             \item Guide answer verification
         \end{itemize}
-    \end{minipage}
-    \begin{minipage}{0.48\linewidth}
+\vfill\columnbreak
     \begin{itemize}
         \item Uses lexical features for classification
         \item [] Lexical features include words, phrases, and part-of-speech tags extracted from the question
         \item The authors use a two-layer question taxonomy with coarse-grained (e.g., definition, location) and fine-grained (e.g., person, city) categories
         \item Different machine learning algorithms (Naive-Bayes)can be used using the  labeled question-answer pairs
     \end{itemize}
-        \end{minipage}
+    \end{multicols}
 \end{frame}
 
 \begin{frame}{Learning Question Classifiers}
@@ -284,7 +303,7 @@ $p_i$s are obtained by employing Naive-Bayes algorithm
 The important phase $\smile$ in the QA system\\
 \textbf{Span Labeling}: The span of text (tokens) that contains the answer. The task of finding the span of text is known as Span Labeling\\
 
-Modern approaches combine a IR-based component   based   on   bigram   hashing and  TF*IDF  matching  and a  multi-layer recurrent neural network model trained to detect  answers \cite{hermann2015teaching} \cite{chen2017reading}
+Modern approaches combine a IR-based component   based   on   bigram   hashing and  TF*IDF  matching  and a  multi-layer recurrent neural network model trained to detect  answers \cite{NIPS2015_afdec700} \cite{chen2017reading}
 \rule{\linewidth}{0.1mm}
 \begin{minipage}{0.4\linewidth}
 Emerging systems are designed as reading comprehension systems
