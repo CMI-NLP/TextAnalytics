@@ -1,0 +1,130 @@
+\input{BeamerHeader.tex}
+
+\title{StarCoder: May the Source be With You!}
+\author{Ramaseshan RAmachandran}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}{Introduction}
+  \begin{itemize}
+    \item StarCoder\cite{li2023starcodersourceyou}, a large language model, is designed for code generation.
+    \item It aims to boost developer productivity with powerful code completion and generation.
+    \item The model is trained on a vast dataset of source code from various languages.
+    \item It emphasizes open access and transparency, fostering community collaboration.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Key Features}
+  \begin{itemize}
+    \item \textbf{Multilingual Support:} Trained on a wide range of programming languages.
+    \item \textbf{Contextual Understanding:} Generates accurate and relevant code by leveraging context (code snippets).
+    \item \textbf{Fill-in-the-Middle (FiM) Capabilities:} Allows code completion within existing code blocks.
+    \item \textbf{Open Access:} Weights and code are released for public use and research.
+    \item \textbf{Large Context Window:} Ability to process larger code snippets for better understanding.
+    \begin{itemize}
+    \item Utilizes a context window of 16,384 tokens
+    \item Employs a sliding window attention of 4,096 tokens
+    \item Allows the model to weigh the importance of each token in the input sequence.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Training Data}
+  \begin{itemize}
+    \item The Stack dataset contains 1 trillion tokens
+    \item 80+ programming languages
+       \item Data preprocessing and filtering done - all symbols $=, <, >$, etc. are considered as a token .
+    \item Emphasizes responsible data usage and transparency.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Training}
+\item Fine-Tuning -  fine-tuned on 35B Python tokens
+\end{frame}
+
+\begin{frame}{Data selection - Section 3 - I}
+\begin{itemize}
+\item Programming Language Selection Criteria: Languages with over 500 MB of data, top 50 ranking on GitHub 2.0 or TIOBE Index, and dialects of selected languages.
+\item Data exclusion criteria include configuration languages, unsupported languages, and data formats with limited volume.
+\item Visual inspection of randomly selected files ensures high-quality code and filters applications based on file extensions.
+\item Data filtering process involves XML, alpha, HTML, JSON, and YAML filters to remove irrelevant files.
+\item Implemented to exclude XML files, especially those with extensions like .sld, based on the presence of “<?xml version=“ within the first 100 characters.
+\item Alpha Filter identifies and removes files with a low percentage of alphabetic characters, especially in data files like MATLAB.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data selection - Section 3 - II}
+\begin{itemize}
+\item Converted Jupyter notebooks to scripts using Jupytext, identifying programming languages from metadata and guessing for unknown notebooks.
+\item Filtered and merged Markdown and code blocks in Jupyter notebooks to create a dataset of consecutive code-text pairs.
+\item Data source: 1.045 million structured Jupyter notebooks and natural language conversations from GitHub issues and pull requests.
+\item Data preprocessing removed auto-generated text, short messages, long comments, and bot-generated content.
+\item Conversations with two or more users or single-user conversations with less than 7,000 characters are included.
+\item Data source: Stack dataset, Git commits, and GitHub issues.
+\item Filtered out non-English issues, repositories with opted-out users, and deduplicated source code files.
+\item Data anonymization replaced usernames in conversations with participant counters - ip address, password, keys, id, email, user name, etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Architecture}
+\begin{itemize}
+\item Core Architecture: Decoder-Only Transformer - focus on predicting the next token in a sequence
+\item Decoder-only-models: Process the input sequence and generate the output sequence in a single pass
+\item Performance: The fine-tuning enhances capabilities, particularly in Python-specific tasks, improving overall code generation accuracy.
+\end{itemize}
+\begin{tabular}{l|l|l}
+\hline
+Hyperparameter &SantaCoder&\\
+\hline
+Hidden size:&2048&6144\\
+Intermediate size& 8192&24576\\
+Max. position embeddings& 2048&8192\\
+Num. of attention heads& 16&48\\
+Num. of hidden layers &24 &40\\
+Attention &Multi-query&Multi-query\\
+Num. of parameters&$\approx$1.1B &$\approx$5.5B\\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Key Architectural Features}
+\begin{itemize}
+\item Multi-query attention, an optimization technique, improves the efficiency of the attention mechanism in SantaCoder.
+\item This technique reduces memory footprint and speeds inference, enabling longer sequence handling.
+\item Fill-in-the-Middle (FiM) is crucial to SantaCoder’s architecture. It lets the model generate code sequentially and fill missing code segments in existing blocks. This is valuable for code editing and refactoring.
+\item Optimized for Code Tasks:
+The architecture is optimized for code-related tasks, considering source code’s structured nature and syntax importance.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hardware setup}
+\begin{itemize}
+\item Trained on a GPU cluster with 512 A100 80 GB GPUs distributed across 64 nodes.
+\item Model parallelism used a 3D-parallel layout with tensor and pipeline parallelism, needing 16 GPUs per replica.
+\item Utilized 32-fold data parallelism with a micro-batch size of 1, accumulating for 16 steps to achieve a global batch size of 512.
+
+\end{itemize}
+\end{frame}
+\begin{frame}{Impact and Applications}
+    \begin{itemize}
+        \item Code completion and generation tools.
+        \item Assisting in code review and debugging.
+        \item Automating repetitive coding tasks.
+        \item Educational tool for learning programming.
+        \item Research platform for further advancements in code LLMs.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+    \begin{itemize}
+        \item StarCoder represents a significant step towards powerful and accessible code generation models.
+        \item Its open nature promotes collaboration and innovation in the field.
+        \item "May the source be with you!" emphasizes the importance of code accessibility and community.
+    \end{itemize}
+\end{frame}
+\end{document}
