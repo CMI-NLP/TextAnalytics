@@ -1,16 +1,96 @@
-\begin{frame}{Introduction}
+\begin{frame}[allowframebreaks]{Introduction}
 \begin{itemize}
-\item LLMs have transformed artificial intelligence, extending beyond traditional NLP.
-Formal logic systems but struggled with real-world complexity.
-LLMs learn knowledge and reasoning from data.
-Fundamental change: Programmed logic $\rightarrow$ learned reasoning
-LLMs' ability to acquire knowledge opens up a new avenue in reasoning.
-May lead to verifiability in many tasks $\rightarrow$ legal analysis, scientific discovery,$\cdots$
-Traditional Reasoning in AI involves applying structured rules to derive conclusions.
-LLM-based reasoning  integrates natural language understanding enables multi-step deduction and abstraction.
-Can this lead to generalization of inferences?
-Algorithmic reasoning may lead to
-Multi-step thought processes which may enhance the clarity and trustworthiness of LLM outcomes.
-
+    \item 	LLMs have transformed artificial intelligence, extending beyond traditional NLP.
+	\item They learn knowledge and reasoning from data, unlike formal logic systems that struggled with real-world complexity.
+	\item LLMs’ ability to acquire knowledge opens up a new avenue in reasoning.
+	\item They may lead to verifiability in many tasks, such as legal analysis, scientific discovery, $\cdots$.
+	\item Traditional reasoning in AI involves applying structured rules to derive conclusions, while LLM-based reasoning integrates natural language understanding and enables multi-step deduction and abstraction.
+	\item Algorithmic reasoning may lead to multi-step thought processes, which may enhance the clarity and trustworthiness of LLM outcomes.
+    \framebreak
+    \item Logical, common-sense, and mathematical reasoning are crucial for AI systems
+    \item Provide analytical skills. Formal and symbolic logic-based reasoning will be distinguished from heuristic approaches like Chain-of-Thought prompting.
+    \item The attention mechanism may facilitate coherent thought generation.
+    \item Empirical evidence suggests a correlation between LLM scale and reasoning abilities.
+    \item Parameters and training data (AKA scale) is critical for unlocking reasoning potential. LLM Performance is directly proportional to scale (demonstrated - ELMO$ \rightarrow$ transformer)
+    \item Deep dive into into the theoretical framework is needed to improve the model design, training, and prompting strategies.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Deductive Reasoning (Top-Down Logic)}
+
+\textbf{What it is:} Starting with a general rule and applying it to a specific situation to reach a certain conclusion.
+
+\bigskip % Add some vertical space
+
+\begin{block}{Simple Example}
+  \begin{itemize}
+    \item \textbf{General Rule:} All dogs bark.
+    \item \textbf{Specific Case:} Fido is a dog.
+    \item \textbf{Deductive Conclusion:} Therefore, Fido barks.
+  \end{itemize}
+\end{block}
+
+\bigskip
+
+Generally good at simple deductions, but struggle with complex, multi-step logic or strict coherence in long arguments.
+\end{frame}
+
+% Frame 2: Inductive Reasoning
+\begin{frame}[fragile]
+\frametitle{Inductive Reasoning (Bottom-Up Logic)}
+
+Forming a general rule or conclusion from specific examples or observations. This conclusion is likely, but not necessarily true.
+
+\bigskip
+
+\begin{block}{Simple Example}
+  \begin{itemize}
+    \item \textbf{Observation 1:} I am a saggitarian. I spill coffee \verb|;)|
+    \item \textbf{Observation 2:} My uncle is a saggitarian and he spills coffee
+    \item \textbf{Inductive Conclusion:} Therefore, many saggitarians probably spill coffee.
+  \end{itemize}
+\end{block}
+
+\bigskip
+
+LLMs excel at generalizing from observed patterns but might not invent entirely novel hypotheses far beyond their training data.
+\end{frame}
+
+% Frame 3: Abductive Reasoning
+\begin{frame}
+\frametitle{Abductive Reasoning (Making the Best Guess)}
+
+Observing an outcome and guessing the most likely cause based on incomplete information, like a detective making an educated guess.
+
+\bigskip
+
+\begin{block}{Simple Example}
+  \begin{itemize}
+    \item \textbf{Observation:} The street outside is wet.
+    \item \textbf{Possible Explanations:} It rained, a street cleaner went by, someone spilled water.
+    \item \textbf{Abductive Conclusion (Best Guess):} The most likely explanation is that it rained (based on common occurrences).
+  \end{itemize}
+\end{block}
+
+\bigskip
+
+ Suggest plausible explanations based on data correlations, but lack true understanding of causality and context, limiting reliability in complex situations.
+\end{frame}
+
+% Frame 4: Analogical Reasoning
+\begin{frame}
+\frametitle{Analogical Reasoning (Finding Similarities)}
+
+Comparing similar things or situations to learn, infer, or explain something about one of them.
+
+\bigskip
+
+\begin{block}{Simple Example}
+  Just like a \textit{seed} needs soil and water to grow into a \textit{plant}, a \textit{child} needs care and education to grow into a capable \textit{adult}.
+\end{block}
+
+\bigskip
+
+Capable of generating basic analogies based on linguistic similarity, they may miss deeper, conceptual parallels due to a lack of real-world understanding of the underlying relationships.
 \end{frame}
