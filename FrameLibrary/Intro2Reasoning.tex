@@ -131,3 +131,62 @@ Capable of generating basic analogies based on linguistic similarity, they may m
 	•	The occurrence of errors in complex reasoning and theorem proving underscores the need for further research to ensure the reliability and accuracy of LLMs in mathematical applications.
 
 \end{frame}
+
+\begin{frame}{Chain-of-thought}
+	•	Chain-of-Thought (CoT) prompting is a technique that enhances the reasoning capabilities of LLMs.
+	•	It involves providing examples within the prompt that demonstrate the process of reasoning through intermediate steps.
+	•	The LLM is encouraged to generate a similar sequence of thought steps when faced with new problems.
+	•	This method has been shown to yield substantial improvements in performance across various reasoning tasks.
+	•	CoT allows models to break down complex problems into smaller, more manageable parts.
+	•	It leads to more accurate solutions.
+	•	Standard CoT prompting has limitations, such as not always guaranteeing correct reasoning paths and being sensitive to specific examples chosen for the prompt.
+	•	Advanced adaptations have been explored to enhance CoT capabilities, including Plan-and-Solve Prompting, Least-to-Most Prompting, Recursion of Thought, Meta Chain-of-Thought, and multi-agent strategies.
+	•	Plan-and-Solve Prompting encourages the model to create a high-level plan before generating detailed reasoning steps.
+	•	Least-to-Most Prompting involves solving simpler subproblems before tackling the main problem.
+	•	Recursion of Thought explores divide-and-conquer strategies for multi-context reasoning.
+	•	Meta Chain-of-Thought aims to teach LLMs the general strategy of how to think by providing examples of effective reasoning processes.
+	•	Multi-agent strategies combine CoT with the idea of using multiple specialized agents that collaborate to solve complex problems.
+	•	Chain-of-Thought (CoT) prompting is a framework for step-by-step problem-solving in LLMs.
+	•	CoT’s effectiveness depends on the quality of prompts.
+	•	Research explores sophisticated variations to overcome limitations and improve reasoning capabilities.
+	•	CoT works by providing a template for thought, highlighting the model’s ability to learn and apply patterns.
+	•	Decomposition of problems into smaller steps reduces complexity and makes it easier for the LLM to arrive at a correct answer.
+	•	CoT has spurred research into prompt engineering as a method for enhancing LLM capabilities without retraining or fine-tuning.
+	•	Self-Consistency Decoding is a strategy to improve LLM reasoning reliability by generating multiple diverse reasoning pathways and aggregating results to select the most consistent answer.
+	•	Self-consistency involves sampling a set of different reasoning paths from the LLM’s decoder.
+	•	The final answer is chosen by taking a majority vote across the set of answers produced by diverse reasoning paths.
+	•	This approach is based on the idea that for complex problems, there are often multiple valid ways to arrive at the correct solution.
+	•	If several different reasoning paths converge to the same answer, there is a higher likelihood that the answer is indeed correct.
+	•	Self-consistency improves LLM reasoning accuracy and robustness.
+	•	It samples multiple reasoning paths to mitigate greedy decoding limitations.
+	•	Self-consistency reduces reliance on single sampled generation.
+	•	It is an unsupervised method that can be applied directly to pre-trained LLMs.
+	•	Self-consistency enhances the reliability of LLM reasoning.
+	•	It leverages the idea that multiple independent reasoning processes increase confidence.
+	•	Self-consistency builds upon Chain-of-Thought by ensuring consistency across multiple chains.
+	•	It reduces the impact of flawed reasoning steps by sampling multiple paths and using a voting mechanism.
+	•	Self-consistency offers a valuable approach to improve existing LLMs without additional training data or resources.
+	•	Integration of External Knowledge:
+	•	Retrieval-Augmented Generation (RAG) is a framework that enhances the reasoning capabilities of LLMs.
+	•	RAG provides LLMs with access to relevant information from external knowledge sources.
+	•	The RAG process involves retrieving pertinent knowledge from an external database and using it to augment the LLM’s response generation.
+	•	RAG can address limitations of LLMs, such as hallucination, outdated information, and lack of specialized knowledge.
+	•	The typical RAG workflow consists of indexing the external knowledge source, retrieving relevant information, and generating a response that incorporates the retrieved knowledge.
+	•	Advanced RAG techniques focus on optimizing each stage of the workflow, such as fine-tuning knowledge segmentation during indexing, enhancing retrieval through query optimization, and improving the processing and utilization of retrieved information by the LLM.
+	•	Knowledge Graphs (KGs) are structured knowledge repositories that store factual information as entities and their relationships.
+	•	Integrating KGs with LLMs can enhance their reasoning abilities by providing a structured source of external knowledge.
+	•	Various approaches have been explored for this integration, including methods that fuse representations learned from both the LLM and the KG.
+	•	Frameworks where the LLM acts as an agent that can interact with and query the KG to perform reasoning have also been explored.
+	•	GuideKG is a method that uses LLMs to generate knowledge-based explanations to improve the common-sense reasoning of smaller language models.
+	•	KG-GPT is a framework designed to leverage the capabilities of LLMs for complex reasoning tasks that involve Knowledge Graphs.
+	•	Effective integration of external knowledge requires careful consideration of how to elicit, filter, and seamlessly incorporate this information into the LLM’s thought process.
+	•	Retrieval techniques aim to identify the most relevant documents, passages, or structured data based on the input query.
+	•	Once retrieved, this knowledge can be integrated into the LLM’s prompt in various ways, such as by directly inserting relevant text or by using embeddings to represent the knowledge in a continuous vector space that the LLM can then process.
+	•	RankRAG is a novel framework that instruction-tunes a single LLM to perform both the task of ranking retrieved contexts based on their relevance and generating an answer using these contexts.
+	•	LINKED proposes a process of eliciting knowledge from LLMs, filtering it for accuracy and relevance, and then integrating it to improve their common-sense reasoning abilities.
+	•	The integration of external knowledge through Retrieval-Augmented Generation and the utilization of Knowledge Graphs can address the limitations of LLMs’ internal knowledge.
+	•	These techniques can enhance LLMs’ reasoning capabilities in tasks that heavily rely on factual information.
+	•	By providing LLMs with access to up-to-date and domain-specific knowledge, these techniques can address issues of hallucination and outdated information.
+	•	Grounding the LLM’s reasoning in verifiable external sources is crucial for increasing confidence in its outputs, especially in sensitive or critical domains.
+
+\end{frame}
